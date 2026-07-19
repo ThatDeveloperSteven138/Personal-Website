@@ -1,98 +1,97 @@
-# vinext-starter
+# 個人數碼花園
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+以物理、科技、系統思考、學習歷程與生活價值為核心的繁體中文個人網站。
 
-## Prerequisites
+這個專案同時支援：
 
-- Node.js `>=22.13.0`
+- 本機預覽
+- OpenAI Sites 建置
+- GitHub Pages 靜態網站部署
 
-## Quick Start
+## 發佈前修改
+
+請先在 `app/page.tsx` 和 `app/layout.tsx` 將「［公開顯示名稱］」換成你希望公開的名稱。不要加入不希望公開的身份或聯絡資料。
+
+## 本機預覽
+
+需要 Node.js 22 或以上版本。
 
 ```bash
-npm install
+npm ci
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+然後打開 `http://localhost:3000`。
 
-## Included Shape
+## 部署到 GitHub Pages
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+專案已包含 `.github/workflows/deploy-pages.yml`。每次將程式推送到 `main` 分支，GitHub Actions 都會自動建立及部署靜態網站。
 
-## Workspace Auth Headers
+### 1. 建立 GitHub Repository
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+1. 登入 GitHub。
+2. 按右上角 `+`，選擇 `New repository`。
+3. 輸入 Repository 名稱，例如 `personal-website`。
+4. 選擇 `Public` 或 `Private`。
+5. 不要勾選建立 README、`.gitignore` 或 License，然後建立 Repository。
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+> **重要私隱提示：**一般個人 GitHub Pages 網站會公開在互聯網上；即使 Repository 是 Private，也不代表 Pages 網站是私人。私人 GitHub Pages 存取控制主要供使用 GitHub Enterprise Cloud 的組織網站使用。部署前請再次確認網站沒有私人資料。
 
-Treat the full name as optional and fall back to email when it is absent:
+### 2. 將本機專案推送到 GitHub
 
-```tsx
-import { headers } from "next/headers";
+在本資料夾執行以下指令，並把範例網址換成你的 Repository 網址：
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+git remote add origin https://github.com/YOUR-USERNAME/personal-website.git
+git push -u origin main
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+如果已經有名為 `origin` 的 remote，請改用：
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```bash
+git remote set-url origin https://github.com/YOUR-USERNAME/personal-website.git
+git push -u origin main
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+### 3. 啟用 GitHub Pages
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+1. 在 GitHub Repository 打開 `Settings`。
+2. 左側選擇 `Pages`。
+3. 在 `Build and deployment` 的 `Source` 選擇 `GitHub Actions`。
+4. 打開 `Actions` 分頁，等待 `Deploy personal website to GitHub Pages` 完成。
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+部署後網址通常是：
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+```text
+https://YOUR-USERNAME.github.io/personal-website/
+```
 
-## Useful Commands
+如果 Repository 名稱是 `YOUR-USERNAME.github.io`，網址會是：
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+```text
+https://YOUR-USERNAME.github.io/
+```
 
-## Learn More
+## 更新網站
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+修改完成後執行：
+
+```bash
+git add .
+git commit -m "Update personal website"
+git push
+```
+
+GitHub Actions 會自動重新部署。
+
+## 自訂 Domain（可選）
+
+GitHub Repository 的 `Settings` → `Pages` 可以設定 Custom domain。設定後還要在你的 Domain 供應商加入 GitHub 指定的 DNS 記錄。
+
+## 本機驗證 GitHub Pages 輸出
+
+```bash
+npm run test:github
+```
+
+靜態輸出會建立在 `out/`，此資料夾不需要提交到 GitHub。
