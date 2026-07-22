@@ -15,7 +15,7 @@ test("exports a GitHub Pages-ready static site", async () => {
   ]);
 
   assert.match(html, /<html[^>]+lang="en"/i);
-  assert.match(html, /<link rel="icon" href="https:\/\/test-user\.github\.io\/personal-website\/brand-avatar\.png"[^>]+type="image\/png"/);
+  assert.match(html, /<link rel="icon" href="https:\/\/test-user\.github\.io\/personal-website\/favicon-rounded\.png"[^>]+type="image\/png"[^>]+sizes="256x256"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<h1 id="about-title">About Me<\/h1>/);
   assert.match(html, /22-year-old university student from Hong Kong/);
@@ -50,6 +50,7 @@ test("exports a GitHub Pages-ready static site", async () => {
 
   await Promise.all([
     access(new URL("../out/favicon.svg", import.meta.url)),
+    access(new URL("../out/favicon-rounded.png", import.meta.url)),
     access(new URL("../out/brand-avatar.png", import.meta.url)),
     access(new URL("../out/extension-icons/website-auto-refresh.png", import.meta.url)),
     access(new URL("../out/extension-icons/youtube-search-history-hider.png", import.meta.url)),

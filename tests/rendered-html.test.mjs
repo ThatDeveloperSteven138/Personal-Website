@@ -65,8 +65,11 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<html[^>]+lang="en"/i);
   assert.match(html, /<main[^>]+lang="en"/i);
   assert.match(html, /That Developer Steven/);
-  assert.match(html, /<link rel="icon" href="http:\/\/localhost:3000\/brand-avatar\.png"[^>]+type="image\/png"/);
-  assert.match(html, /<link rel="shortcut icon" href="http:\/\/localhost:3000\/brand-avatar\.png"/);
+  const iconLink = html.match(/<link rel="icon"[^>]*>/)?.[0] ?? "";
+  assert.match(iconLink, /href="http:\/\/localhost:3000\/favicon-rounded\.png"/);
+  assert.match(iconLink, /type="image\/png"/);
+  assert.match(iconLink, /sizes="256x256"/);
+  assert.match(html, /<link rel="shortcut icon" href="http:\/\/localhost:3000\/favicon-rounded\.png"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /<p class="about-star" aria-hidden="true">✦<\/p>/);
