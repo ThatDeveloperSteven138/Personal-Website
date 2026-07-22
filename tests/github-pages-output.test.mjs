@@ -17,7 +17,9 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.match(html, /<html[^>]+lang="en"/i);
   assert.match(html, /<link rel="icon" href="https:\/\/test-user\.github\.io\/personal-website\/brand-avatar\.png"[^>]+type="image\/png"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
-  assert.match(html, /Starting with physics, technology, and systems/);
+  assert.match(html, /<h1 id="about-title">About Me<\/h1>/);
+  assert.match(html, /22-year-old university student from Hong Kong/);
+  assert.match(html, /This website is where I share my browser extensions/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /\/personal-website\/_next\//);
   assert.match(html, /href="\/personal-website\/interests\/"/);
@@ -35,14 +37,15 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.match(extensionsHtml, /\.\.\/extension-icons\/better-instagram\.png/);
 
   assert.match(chineseHtml, /<main[^>]+lang="zh-Hant"/i);
-  assert.match(chineseHtml, /從物理、科技與系統出發/);
+  assert.match(chineseHtml, /<h1 id="about-title">關於我<\/h1>/);
+  assert.match(chineseHtml, /來自香港的 22 歲大學生/);
   assert.match(chineseHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(chineseHtml, /href="\/personal-website\/zh\/interests\/"/);
   assert.match(chineseHtml, /href="\/personal-website\/"/);
   assert.match(chineseExtensionsHtml, /我製作的擴充功能/);
   assert.match(chineseExtensionsHtml, /\.\.\/\.\.\/extension-icons\/better-instagram\.png/);
 
-  assert.match(englishAliasHtml, /Starting with physics, technology, and systems/);
+  assert.match(englishAliasHtml, /<h1 id="about-title">About Me<\/h1>/);
   assert.match(englishAliasHtml, /href="\/personal-website\/interests\/"/);
 
   await Promise.all([

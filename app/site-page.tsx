@@ -28,14 +28,17 @@ const translations = {
       values: "生活價值",
       extensions: "擴充功能",
     },
-    hero: {
-      eyebrow: "物理 · 科技 · 系統 · 人",
-      title: "從物理、科技與系統出發，",
-      titleAccent: "持續理解世界如何運作。",
-      intro: "我喜歡把複雜問題拆開，尋找真正影響結果的因素；以證據建立理解，也為新的證據保留修正空間。",
-      primaryAction: "探索長期興趣",
-      secondaryAction: "看看我如何思考",
-      portraitLabel: "一幅以軌道、節點與座標構成的抽象系統圖",
+    about: {
+      kicker: "ABOUT ME",
+      title: "關於我",
+      paragraphs: [
+        "你好，我是 Steven，在網上亦稱為 Developer Steven。我是一名來自香港的 22 歲大學生，主修物理學及數據分析。",
+        "在大學課程和擴充功能開發以外，我喜歡閱讀、學習投資，以及維持健康而活躍的生活方式。我定期健身，也喜歡遠足、露營、踏單車和釣魚等戶外活動。我亦致力終身學習，經常探索新的 AI 工具和技能，尤其是 vibe coding。",
+        "我嘗試減少使用 Facebook、Instagram 和 Threads 等社交媒體平台。研究發現，較頻繁使用短影音平台與較差的注意力、抑制控制及其他認知表現有關。然而，我不認為問題可以簡單概括為社交媒體完全有害。它的影響會因平台的使用方式、接觸的內容，以及個人控制使用時間的能力而有所不同。",
+        "即使意識到這些風險，我有時仍會發現自己花在網上內容的時間超出原本預期。這個親身困擾促使我製作瀏覽器擴充功能，協助減少干擾、避免無意識滑動，並讓使用者更能掌控自己在網上的時間。",
+        "我最初製作這些擴充功能是為了幫助自己，但也希望它們能夠支援遇到相似困難的人。",
+        "這個網站是我分享瀏覽器擴充功能、新想法和開發進度的地方。我亦希望網站可以讓更多人認識我、交流想法，並與擁有共同興趣的人建立聯繫。",
+      ],
     },
     interests: {
       kicker: "LONG-TERM CURIOSITIES",
@@ -126,14 +129,17 @@ const translations = {
       values: "Life values",
       extensions: "Extensions",
     },
-    hero: {
-      eyebrow: "Physics · Technology · Systems · People",
-      title: "Starting with physics, technology, and systems,",
-      titleAccent: "I keep exploring how the world works.",
-      intro: "I enjoy breaking complex problems into parts and finding the factors that truly shape the outcome—building understanding from evidence while staying open to revision when better evidence appears.",
-      primaryAction: "Explore my interests",
-      secondaryAction: "See how I think",
-      portraitLabel: "An abstract systems portrait formed by orbits, nodes, and coordinates",
+    about: {
+      kicker: "ABOUT ME",
+      title: "About Me",
+      paragraphs: [
+        "Hi, I’m Steven, also known online as Developer Steven. I am a 22-year-old university student from Hong Kong, majoring in Physics and Data Analytics.",
+        "Outside of university and extension development, I enjoy reading, learning about investing, and maintaining a healthy and active lifestyle. I go to the gym regularly and enjoy outdoor activities such as hiking, camping, cycling, and fishing. I am also committed to lifelong learning and frequently explore new AI tools and skills, particularly vibe coding.",
+        "I try to limit my use of social media platforms such as Facebook, Instagram, and Threads. Research has found that heavier use of short-form video platforms is associated with poorer attention, inhibitory control, and other cognitive outcomes. However, I do not believe the issue is as simple as saying that social media is entirely harmful. Its effects can vary depending on how a platform is used, what content a person consumes, and how well they are able to control their usage.",
+        "Despite being conscious of these risks, I still sometimes find myself spending more time than intended on online content. This personal struggle inspired me to create browser extensions that help reduce distractions, discourage mindless scrolling, and give users greater control over how they spend their time online.",
+        "I originally created these extensions to help myself, but I hope they can also support other people who experience similar difficulties.",
+        "This website is where I share my browser extensions, new ideas, and development progress. I also hope it provides an opportunity for more people to get to know me, exchange ideas, and connect over shared interests.",
+      ],
     },
     interests: {
       kicker: "LONG-TERM CURIOSITIES",
@@ -413,28 +419,15 @@ export function SitePage({
           </div>
         </header>
 
-        {page === "home" ? <section className="hero glass" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow"><span aria-hidden="true">✦</span> {copy.hero.eyebrow}</p>
-            <h1 id="hero-title">{copy.hero.title}<span>{copy.hero.titleAccent}</span></h1>
-            <p className="hero-intro">{copy.hero.intro}</p>
-            <div className="hero-actions">
-              <Link className="primary-button" href={pageHref("interests", language)}>{copy.hero.primaryAction}</Link>
-              <Link className="text-link" href={pageHref("thinking", language)}>{copy.hero.secondaryAction} <span aria-hidden="true">↘</span></Link>
+        {page === "home" ? <section className="hero about-hero glass" aria-labelledby="about-title">
+          <div className="about-copy">
+            <p className="eyebrow"><span aria-hidden="true">✦</span> {copy.about.kicker}</p>
+            <h1 id="about-title">{copy.about.title}</h1>
+            <div className="about-body">
+              {copy.about.paragraphs.map((paragraph, index) => (
+                <p className={index === 0 ? "about-intro" : undefined} key={paragraph}>{paragraph}</p>
+              ))}
             </div>
-          </div>
-
-          <div className="system-portrait" aria-label={copy.hero.portraitLabel}>
-            <div className="orbit orbit-a"><span /></div>
-            <div className="orbit orbit-b"><span /></div>
-            <div className="portrait-core">
-              <span className="core-label">CURIOUS<br />SYSTEMS</span>
-            </div>
-            <div className="axis axis-x" aria-hidden="true" />
-            <div className="axis axis-y" aria-hidden="true" />
-            <span className="coordinate coordinate-a">EVIDENCE</span>
-            <span className="coordinate coordinate-b">BOUNDARY</span>
-            <span className="coordinate coordinate-c">UPDATE</span>
           </div>
         </section> : null}
 

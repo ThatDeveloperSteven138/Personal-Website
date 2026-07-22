@@ -122,6 +122,13 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .hero h1 span { display: block; color: #566273; font-weight: 620; }
 .hero-intro { max-width: 640px; color: var(--muted); font-size: 1.08rem; line-height: 1.78; }
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 28px; }
+.about-hero { display: block; min-height: 0; padding: clamp(38px, 5vw, 62px); }
+.about-copy { position: relative; z-index: 1; }
+.about-hero h1 { max-width: none; margin: 14px 0 32px; font-size: clamp(3rem, 5vw, 5rem); }
+.about-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px clamp(34px, 5vw, 64px); }
+.about-body p { margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.78; }
+.about-body .about-intro { grid-column: 1 / -1; max-width: 960px; padding-bottom: 20px; border-bottom: 1px solid var(--soft-line); color: #3d4858; font-size: 1.08rem; line-height: 1.72; }
+.about-body p:last-child { grid-column: 1 / -1; margin-top: 4px; padding-top: 20px; border-top: 1px solid var(--soft-line); color: #465263; }
 .primary-button { background: #1e2836; color: white; border-radius: 999px; padding: 14px 21px; text-decoration: none; font-size: 0.91rem; font-weight: 700; box-shadow: 0 10px 24px rgba(31, 40, 54, 0.18); transition: transform 180ms ease, box-shadow 180ms ease; }
 .primary-button:hover, .primary-button:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 40, 54, 0.24); outline: none; }
 .text-link { font-size: 0.9rem; font-weight: 700; text-decoration: none; }
@@ -225,8 +232,6 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
   .extension-wide-copy { border-left: 0; border-top: 1px solid var(--soft-line); padding: 24px 0 0; }
 }
 
-main[lang="en"] .hero h1 { font-size: clamp(2.75rem, 4.6vw, 4.25rem); letter-spacing: -0.058em; }
-
 @media (max-width: 720px) {
   .page-shell { width: min(100% - 24px, 1180px); padding-top: 12px; }
   .site-header { align-items: flex-start; gap: 14px; padding: 16px; }
@@ -239,7 +244,10 @@ main[lang="en"] .hero h1 { font-size: clamp(2.75rem, 4.6vw, 4.25rem); letter-spa
   .site-header .language-options { grid-column: 1; grid-row: auto; grid-template-columns: 1fr; margin-top: 16px; }
   .hero { padding: 32px 24px 20px; gap: 20px; border-radius: 28px; }
   .hero h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
-  main[lang="en"] .hero h1 { font-size: clamp(2.35rem, 11vw, 3.4rem); }
+  .about-hero { padding: 32px 24px; }
+  .about-hero h1 { margin-bottom: 26px; font-size: clamp(2.6rem, 14vw, 4rem); }
+  .about-body { grid-template-columns: 1fr; gap: 18px; }
+  .about-body .about-intro, .about-body p:last-child { grid-column: auto; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 16px; }
   .system-portrait { width: 290px; height: 340px; transform: scale(.88); }
   .learning-grid { grid-template-columns: 1fr; }

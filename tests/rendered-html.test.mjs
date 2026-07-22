@@ -61,7 +61,14 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<link rel="shortcut icon" href="http:\/\/localhost:3000\/brand-avatar\.png"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
-  assert.match(html, /Starting with physics, technology, and systems/);
+  assert.match(html, /<h1 id="about-title">About Me<\/h1>/);
+  assert.match(html, /22-year-old university student from Hong Kong/);
+  assert.match(html, /go to the gym regularly/);
+  assert.match(html, /heavier use of short-form video platforms/);
+  assert.match(html, /personal struggle inspired me to create browser extensions/);
+  assert.match(html, /originally created these extensions to help myself/);
+  assert.match(html, /This website is where I share my browser extensions/);
+  assert.doesNotMatch(html, /Starting with physics, technology, and systems|system-portrait|hero-actions/);
   assert.match(html, /href="\/" aria-current="page">About me<\/a>/);
   assert.match(html, /href="\/interests"/);
   assert.match(html, /href="\/thinking"/);
@@ -107,7 +114,13 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
   ]);
 
   assert.match(homeHtml, /<main[^>]+lang="zh-Hant"/i);
-  assert.match(homeHtml, /從物理、科技與系統出發/);
+  assert.match(homeHtml, /<h1 id="about-title">關於我<\/h1>/);
+  assert.match(homeHtml, /來自香港的 22 歲大學生/);
+  assert.match(homeHtml, /我定期健身/);
+  assert.match(homeHtml, /較頻繁使用短影音平台/);
+  assert.match(homeHtml, /促使我製作瀏覽器擴充功能/);
+  assert.match(homeHtml, /這個網站是我分享瀏覽器擴充功能/);
+  assert.doesNotMatch(homeHtml, /從物理、科技與系統出發|system-portrait|hero-actions/);
   assert.match(homeHtml, /href="\/zh" aria-current="page">關於我<\/a>/);
   assert.match(homeHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(homeHtml, /href="\/zh\/interests"/);
@@ -191,7 +204,8 @@ test("keeps the previous /en URLs as English compatibility pages", async () => {
     extensionsResponse.text(),
   ]);
 
-  assert.match(homeHtml, /Starting with physics, technology, and systems/);
+  assert.match(homeHtml, /<h1 id="about-title">About Me<\/h1>/);
+  assert.match(homeHtml, /This website is where I share my browser extensions/);
   assert.match(homeHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(homeHtml, /href="\/interests"/);
   assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
