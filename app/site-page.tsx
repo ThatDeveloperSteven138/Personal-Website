@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 export type Language = "zh" | "en";
 export type SitePageName = "home" | "interests" | "thinking" | "values" | "extensions";
 type RoutePrefix = "" | "/en" | "/zh";
+const LANGUAGE_MENU_CLOSE_DELAY_MS = 350;
 
 function pageHref(page: SitePageName, language: Language) {
   const pagePath = page === "home" ? "" : `/${page}`;
@@ -222,6 +223,7 @@ export function SitePage({
 }) {
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageButtonRef = useRef<HTMLButtonElement>(null);
+  const languageMenuCloseTimerRef = useRef<number | null>(null);
   const extensionsSectionRef = useRef<HTMLElement>(null);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [expandedExtensionIndex, setExpandedExtensionIndex] = useState<number | null>(null);
@@ -236,6 +238,12 @@ export function SitePage({
     document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
     document.title = pageTitle;
   }, [language, pageTitle]);
+
+  useEffect(() => () => {
+    if (languageMenuCloseTimerRef.current !== null) {
+      window.clearTimeout(languageMenuCloseTimerRef.current);
+    }
+  }, []);
 
   useEffect(() => {
     function closeMenuFromOutside(event: PointerEvent) {
@@ -330,6 +338,20 @@ export function SitePage({
     setExpandedExtensionIndex(index);
   }
 
+  function cancelLanguageMenuClose() {
+    if (languageMenuCloseTimerRef.current === null) return;
+    window.clearTimeout(languageMenuCloseTimerRef.current);
+    languageMenuCloseTimerRef.current = null;
+  }
+
+  function scheduleLanguageMenuClose() {
+    cancelLanguageMenuClose();
+    languageMenuCloseTimerRef.current = window.setTimeout(() => {
+      setLanguageMenuOpen(false);
+      languageMenuCloseTimerRef.current = null;
+    }, LANGUAGE_MENU_CLOSE_DELAY_MS);
+  }
+
   return (
     <main id="top" lang={language === "zh" ? "zh-Hant" : "en"}>
       <div className="ambient ambient-one" aria-hidden="true" />
@@ -354,13 +376,17 @@ export function SitePage({
               data-open={languageMenuOpen}
               ref={languageMenuRef}
               onPointerEnter={(event) => {
-                if (event.pointerType === "mouse") setLanguageMenuOpen(true);
+                if (event.pointerType !== "mouse") return;
+                cancelLanguageMenuClose();
+                setLanguageMenuOpen(true);
               }}
               onPointerLeave={(event) => {
-                if (event.pointerType === "mouse") setLanguageMenuOpen(false);
+                if (event.pointerType === "mouse") scheduleLanguageMenuClose();
               }}
+              onFocusCapture={cancelLanguageMenuClose}
               onBlurCapture={(event) => {
                 if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                  cancelLanguageMenuClose();
                   setLanguageMenuOpen(false);
                 }
               }}
@@ -373,7 +399,10 @@ export function SitePage({
                 aria-expanded={languageMenuOpen}
                 title={copy.languageLabel}
                 ref={languageButtonRef}
-                onClick={() => setLanguageMenuOpen((open) => !open)}
+                onClick={() => {
+                  cancelLanguageMenuClose();
+                  setLanguageMenuOpen((open) => !open);
+                }}
               >
                 <span className="globe-icon" aria-hidden="true">🌐</span>
               </button>

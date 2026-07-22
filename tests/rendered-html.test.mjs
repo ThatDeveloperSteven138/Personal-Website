@@ -28,6 +28,15 @@ test("language menu spans the complete header width", async () => {
   assert.match(css, /\.language-menu-panel \{ width: 100%;[^}]*left: 0; right: 0;/s);
 });
 
+test("language menu waits for the pointer to reach the panel before closing", async () => {
+  const source = await readFile(new URL("../app/site-page.tsx", import.meta.url), "utf8");
+
+  assert.match(source, /const LANGUAGE_MENU_CLOSE_DELAY_MS = 350;/);
+  assert.match(source, /function scheduleLanguageMenuClose\(\) \{[\s\S]*window\.setTimeout\([\s\S]*setLanguageMenuOpen\(false\);[\s\S]*LANGUAGE_MENU_CLOSE_DELAY_MS\);[\s\S]*\}/);
+  assert.match(source, /onPointerEnter=\{\(event\) => \{[\s\S]*cancelLanguageMenuClose\(\);[\s\S]*setLanguageMenuOpen\(true\);[\s\S]*\}\}/);
+  assert.match(source, /onPointerLeave=\{\(event\) => \{[\s\S]*scheduleLanguageMenuClose\(\);[\s\S]*\}\}/);
+});
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
