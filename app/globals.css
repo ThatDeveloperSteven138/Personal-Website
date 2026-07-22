@@ -131,8 +131,7 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .about-body { display: block; max-width: 1040px; }
 .about-body p { margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.78; }
 .about-body p + p { margin-top: 1.78em; }
-.about-body .about-intro { color: #3d4858; font-size: 1.08rem; line-height: 1.72; }
-.about-body p:last-child { color: #465263; }
+.about-body .about-intro { font-size: 1.08rem; line-height: 1.72; }
 .primary-button { background: #1e2836; color: white; border-radius: 999px; padding: 14px 21px; text-decoration: none; font-size: 0.91rem; font-weight: 700; box-shadow: 0 10px 24px rgba(31, 40, 54, 0.18); transition: transform 180ms ease, box-shadow 180ms ease; }
 .primary-button:hover, .primary-button:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 40, 54, 0.24); outline: none; }
 .text-link { font-size: 0.9rem; font-weight: 700; text-decoration: none; }

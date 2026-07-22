@@ -34,6 +34,8 @@ test("About Me uses one heading, an equally sized star, and blank lines between 
   assert.match(css, /\.about-heading \{ display: flex; align-items: center;/);
   assert.match(css, /\.about-star, \.about-hero h1 \{ font-size: clamp\(3rem, 5vw, 5rem\); \}/);
   assert.match(css, /\.about-body \{ display: block; max-width: 1040px; \}/);
+  assert.match(css, /\.about-body p \{[^}]*color: var\(--muted\);/);
+  assert.doesNotMatch(css, /\.about-body (?:\.about-intro|p:last-child) \{[^}]*color:/);
   assert.match(css, /\.about-body p \+ p \{ margin-top: 1\.78em; \}/);
 });
 
