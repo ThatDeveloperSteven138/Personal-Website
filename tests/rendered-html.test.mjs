@@ -45,6 +45,20 @@ test("language menu stays open throughout the header and dropdown hover region",
   assert.match(source, /className="language-menu"[\s\S]*?onPointerEnter=\{\(event\) => \{[\s\S]*?setLanguageMenuOpen\(true\);[\s\S]*?\}\}/);
 });
 
+test("extension reveal measures its final layout and scrolls in the same animation", async () => {
+  const [source, css] = await Promise.all([
+    readFile(new URL("../app/site-page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.doesNotMatch(source, /setTimeout|scrollIntoView/);
+  assert.match(source, /useLayoutEffect\(\(\) => \{[\s\S]*?cloneNode\(true\)[\s\S]*?animateWindowScroll\(targetY, duration\)/);
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(css, /\.extension-grid \{[^}]*overflow-anchor: none;/);
+  assert.match(css, /\.extension-wide-reveal \{ --extension-reveal-duration: 420ms;/);
+  assert.match(css, /\.extension-inline-reveal \{ --extension-reveal-duration: 320ms;/);
+});
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);

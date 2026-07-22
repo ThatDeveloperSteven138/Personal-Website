@@ -191,7 +191,7 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 
 .extensions-section { scroll-margin-top: 24px; }
 .extensions-heading { align-items: end; }
-.extension-grid { display: grid; gap: 16px; }
+.extension-grid { display: grid; gap: 16px; overflow-anchor: none; }
 .extension-row-group { min-width: 0; }
 .extension-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .extension-card { border-radius: 26px; overflow: hidden; transition: transform 500ms cubic-bezier(.2, 1.55, .36, 1), background 220ms ease, box-shadow 220ms ease; }
@@ -208,7 +208,7 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .extension-toggle i { margin-left: auto; font-size: 1rem; font-style: normal; line-height: 1; transition: transform 260ms ease; }
 .extension-card.is-active .extension-toggle i { transform: rotate(180deg); }
 .extension-inline-reveal { display: none; }
-.extension-wide-reveal { display: grid; grid-template-rows: 0fr; margin-top: 0; border-radius: 30px; opacity: 0; overflow: hidden; pointer-events: none; transform: translateY(-12px) scale(.985); transition: grid-template-rows 420ms cubic-bezier(.22, 1, .36, 1), margin-top 420ms cubic-bezier(.22, 1, .36, 1), opacity 220ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1); }
+.extension-wide-reveal { --extension-reveal-duration: 420ms; display: grid; grid-template-rows: 0fr; margin-top: 0; border-radius: 30px; opacity: 0; overflow: hidden; pointer-events: none; transform: translateY(-12px) scale(.985); transition: grid-template-rows var(--extension-reveal-duration) cubic-bezier(.22, 1, .36, 1), margin-top var(--extension-reveal-duration) cubic-bezier(.22, 1, .36, 1), opacity 220ms ease, transform var(--extension-reveal-duration) cubic-bezier(.22, 1, .36, 1); }
 .extension-wide-reveal.is-open { grid-template-rows: 1fr; margin-top: 18px; opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
 .extension-wide-inner { min-height: 0; overflow: hidden; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: clamp(28px, 5vw, 72px); padding: 0 clamp(30px, 5vw, 58px); transition: padding 420ms cubic-bezier(.22, 1, .36, 1); }
 .extension-wide-reveal.is-open .extension-wide-inner { padding-top: 34px; padding-bottom: 34px; }
@@ -261,8 +261,8 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
   .extension-card > button { min-height: 218px; }
   .extension-row.has-active .extension-card.is-before-active, .extension-row.has-active .extension-card.is-after-active, .extension-card.is-active { transform: none; }
   .extension-wide-reveal { display: none; }
-  .extension-inline-reveal { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 320ms cubic-bezier(.22, 1, .36, 1), opacity 200ms ease; }
-  .extension-inline-reveal > div { min-height: 0; overflow: hidden; padding: 0 20px; transition: padding 320ms cubic-bezier(.22, 1, .36, 1); }
+  .extension-inline-reveal { --extension-reveal-duration: 320ms; display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows var(--extension-reveal-duration) cubic-bezier(.22, 1, .36, 1), opacity 200ms ease; }
+  .extension-inline-reveal > div { min-height: 0; overflow: hidden; padding: 0 20px; transition: padding var(--extension-reveal-duration) cubic-bezier(.22, 1, .36, 1); }
   .extension-inline-reveal.is-open { grid-template-rows: 1fr; opacity: 1; }
   .extension-inline-reveal.is-open > div { padding: 0 20px 22px; }
   .thinking-section, .values-section { min-height: 180px; padding: 32px 24px; }

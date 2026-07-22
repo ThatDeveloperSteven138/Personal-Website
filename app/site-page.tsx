@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export type Language = "zh" | "en";
 export type SitePageName = "home" | "interests" | "thinking" | "values" | "extensions";
@@ -215,6 +215,61 @@ const translations = {
   },
 } as const;
 
+const EXTENSION_VIEWPORT_PADDING_PX = 24;
+const EXTENSION_REVEAL_EASING = [0.22, 1, 0.36, 1] as const;
+
+function cubicBezierProgress(progress: number, [x1, y1, x2, y2]: readonly number[]) {
+  const sampleCurve = (time: number, point1: number, point2: number) => {
+    const inverseTime = 1 - time;
+    return 3 * inverseTime * inverseTime * time * point1
+      + 3 * inverseTime * time * time * point2
+      + time * time * time;
+  };
+
+  let lowerBound = 0;
+  let upperBound = 1;
+  for (let iteration = 0; iteration < 10; iteration += 1) {
+    const time = (lowerBound + upperBound) / 2;
+    if (sampleCurve(time, x1, x2) < progress) lowerBound = time;
+    else upperBound = time;
+  }
+
+  return sampleCurve((lowerBound + upperBound) / 2, y1, y2);
+}
+
+function animateWindowScroll(targetY: number, duration: number) {
+  const startY = window.scrollY;
+  const startTime = performance.now();
+  let frameId = 0;
+  let stopped = false;
+
+  function stop() {
+    if (stopped) return;
+    stopped = true;
+    window.cancelAnimationFrame(frameId);
+    window.removeEventListener("wheel", stop);
+    window.removeEventListener("touchstart", stop);
+    window.removeEventListener("pointerdown", stop);
+  }
+
+  function step(now: number) {
+    if (stopped) return;
+    const elapsed = Math.min((now - startTime) / duration, 1);
+    const easedProgress = cubicBezierProgress(elapsed, EXTENSION_REVEAL_EASING);
+    window.scrollTo({ top: startY + (targetY - startY) * easedProgress, behavior: "auto" });
+
+    if (elapsed < 1) frameId = window.requestAnimationFrame(step);
+    else stop();
+  }
+
+  window.addEventListener("wheel", stop, { passive: true });
+  window.addEventListener("touchstart", stop, { passive: true });
+  window.addEventListener("pointerdown", stop, { passive: true });
+  frameId = window.requestAnimationFrame(step);
+
+  return stop;
+}
+
 export function SitePage({
   page,
   language = "en",
@@ -227,6 +282,7 @@ export function SitePage({
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageButtonRef = useRef<HTMLButtonElement>(null);
   const extensionsSectionRef = useRef<HTMLElement>(null);
+  const extensionScrollCancelRef = useRef<(() => void) | null>(null);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const [expandedExtensionIndex, setExpandedExtensionIndex] = useState<number | null>(null);
   const [selectedExtensionIndex, setSelectedExtensionIndex] = useState<number | null>(null);
@@ -296,32 +352,78 @@ export function SitePage({
     };
   }, [expandedExtensionIndex]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    extensionScrollCancelRef.current?.();
+    extensionScrollCancelRef.current = null;
     if (expandedExtensionIndex === null) return;
+
+    const section = extensionsSectionRef.current;
+    if (!section) return;
+
     const activeIndex = expandedExtensionIndex;
+    const mobileLayout = window.matchMedia("(max-width: 720px)").matches;
+    const targetSelector = mobileLayout
+      ? `[data-extension-index="${activeIndex}"]`
+      : `[data-extension-panel="${Math.floor(activeIndex / 5)}"]`;
+    const liveTarget = section.querySelector<HTMLElement>(targetSelector);
+    if (!liveTarget) return;
+
+    const sectionBounds = section.getBoundingClientRect();
+    const measurement = section.cloneNode(true) as HTMLElement;
+    measurement.setAttribute("aria-hidden", "true");
+    Object.assign(measurement.style, {
+      position: "absolute",
+      visibility: "hidden",
+      pointerEvents: "none",
+      left: "-100000px",
+      top: "0",
+      width: `${sectionBounds.width}px`,
+      margin: "0",
+    });
+    document.body.appendChild(measurement);
+
+    const measuredTarget = measurement.querySelector<HTMLElement>(targetSelector);
+    if (!measuredTarget) {
+      measurement.remove();
+      return;
+    }
+
+    const measurementBounds = measurement.getBoundingClientRect();
+    const finalTargetBounds = measuredTarget.getBoundingClientRect();
+    const finalTargetTop = sectionBounds.top + window.scrollY
+      + finalTargetBounds.top - measurementBounds.top;
+    const finalTargetHeight = finalTargetBounds.height;
+    measurement.remove();
+
+    const visibleTop = window.scrollY + EXTENSION_VIEWPORT_PADDING_PX;
+    const visibleBottom = window.scrollY + window.innerHeight - EXTENSION_VIEWPORT_PADDING_PX;
+    const finalTargetBottom = finalTargetTop + finalTargetHeight;
+    const isFullyVisible = finalTargetTop >= visibleTop && finalTargetBottom <= visibleBottom;
+    if (isFullyVisible) return;
+
+    const availableHeight = window.innerHeight - EXTENSION_VIEWPORT_PADDING_PX * 2;
+    const targetY = Math.max(0, finalTargetHeight <= availableHeight
+      ? finalTargetTop - (window.innerHeight - finalTargetHeight) / 2
+      : finalTargetTop - EXTENSION_VIEWPORT_PADDING_PX);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const scrollTimer = window.setTimeout(() => {
-      const section = extensionsSectionRef.current;
-      const activeCard = section?.querySelector<HTMLElement>(`[data-extension-index="${activeIndex}"]`);
-      const widePanel = section?.querySelector<HTMLElement>(`[data-extension-panel="${Math.floor(activeIndex / 5)}"]`);
-      const target = window.matchMedia("(max-width: 720px)").matches ? activeCard : widePanel;
-      if (!target) return;
+    if (reduceMotion) {
+      window.scrollTo({ top: targetY, behavior: "auto" });
+      return;
+    }
 
-      const bounds = target.getBoundingClientRect();
-      const viewportPadding = 24;
-      const isFullyVisible = bounds.top >= viewportPadding
-        && bounds.bottom <= window.innerHeight - viewportPadding;
+    const reveal = mobileLayout
+      ? liveTarget.querySelector<HTMLElement>(".extension-inline-reveal")
+      : liveTarget;
+    const duration = Number.parseFloat(
+      reveal ? getComputedStyle(reveal).getPropertyValue("--extension-reveal-duration") : "",
+    ) || 420;
+    extensionScrollCancelRef.current = animateWindowScroll(targetY, duration);
 
-      if (!isFullyVisible) {
-        target.scrollIntoView({
-          behavior: reduceMotion ? "auto" : "smooth",
-          block: "center",
-        });
-      }
-    }, reduceMotion ? 0 : 440);
-
-    return () => window.clearTimeout(scrollTimer);
+    return () => {
+      extensionScrollCancelRef.current?.();
+      extensionScrollCancelRef.current = null;
+    };
   }, [expandedExtensionIndex]);
 
   function toggleExtension(index: number) {
