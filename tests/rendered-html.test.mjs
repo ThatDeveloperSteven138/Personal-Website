@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const expectedExtensionOrder = [
@@ -18,6 +19,14 @@ function renderedExtensionNames(html) {
   return [...html.matchAll(/<span class="extension-name" id="extension-card-title-\d+">([^<]+)<\/span>/g)]
     .map((match) => match[1]);
 }
+
+test("language menu spans the complete header width", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /\.language-menu \{ position: static;/);
+  assert.match(css, /\.language-menu::after \{[^}]*width: 100%;[^}]*left: 0;/s);
+  assert.match(css, /\.language-menu-panel \{ width: 100%;[^}]*left: 0; right: 0;/s);
+});
 
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
