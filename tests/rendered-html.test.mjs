@@ -28,6 +28,14 @@ test("language menu spans the complete header width", async () => {
   assert.match(css, /\.language-menu-panel \{ width: 100%;[^}]*left: 0; right: 0;/s);
 });
 
+test("About Me uses one heading, an equally sized star, and blank lines between paragraphs", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /\.about-star, \.about-hero h1 \{ font-size: clamp\(3rem, 5vw, 5rem\); \}/);
+  assert.match(css, /\.about-body \{ display: block; max-width: 1040px; \}/);
+  assert.match(css, /\.about-body p \+ p \{ margin-top: 1\.78em; \}/);
+});
+
 test("language menu stays open throughout the header and dropdown hover region", async () => {
   const source = await readFile(new URL("../app/site-page.tsx", import.meta.url), "utf8");
 
@@ -61,7 +69,9 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<link rel="shortcut icon" href="http:\/\/localhost:3000\/brand-avatar\.png"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
+  assert.match(html, /<p class="about-star" aria-hidden="true">✦<\/p>/);
   assert.match(html, /<h1 id="about-title">About Me<\/h1>/);
+  assert.doesNotMatch(html, /<p class="eyebrow"[^>]*>[^<]*<span[^>]*>✦<\/span>\s*ABOUT ME/);
   assert.match(html, /22-year-old university student from Hong Kong/);
   assert.match(html, /go to the gym regularly/);
   assert.match(html, /heavier use of short-form video platforms/);

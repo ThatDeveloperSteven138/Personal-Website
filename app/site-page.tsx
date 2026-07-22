@@ -29,7 +29,6 @@ const translations = {
       extensions: "擴充功能",
     },
     about: {
-      kicker: "ABOUT ME",
       title: "關於我",
       paragraphs: [
         "你好，我是 Steven，在網上亦稱為 Developer Steven。我是一名來自香港的 22 歲大學生，主修物理學及數據分析。",
@@ -130,7 +129,6 @@ const translations = {
       extensions: "Extensions",
     },
     about: {
-      kicker: "ABOUT ME",
       title: "About Me",
       paragraphs: [
         "Hi, I’m Steven, also known online as Developer Steven. I am a 22-year-old university student from Hong Kong, majoring in Physics and Data Analytics.",
@@ -421,7 +419,7 @@ export function SitePage({
 
         {page === "home" ? <section className="hero about-hero glass" aria-labelledby="about-title">
           <div className="about-copy">
-            <p className="eyebrow"><span aria-hidden="true">✦</span> {copy.about.kicker}</p>
+            <p className="about-star" aria-hidden="true">✦</p>
             <h1 id="about-title">{copy.about.title}</h1>
             <div className="about-body">
               {copy.about.paragraphs.map((paragraph, index) => (
