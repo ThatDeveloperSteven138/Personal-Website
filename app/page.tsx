@@ -1,5 +1,5 @@
 import { SitePage } from "./site-page";
 
 export default function Home() {
-  return <SitePage page="home" />;
+  return <SitePage page="home" language="en" />;
 }

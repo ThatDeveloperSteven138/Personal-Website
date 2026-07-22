@@ -13,27 +13,29 @@ async function render(path = "/") {
   );
 }
 
-test("server-renders the private personal digital garden", async () => {
+test("server-renders English as the default language", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<html[^>]+lang="zh-Hant"/i);
+  assert.match(html, /<html[^>]+lang="en"/i);
+  assert.match(html, /<main[^>]+lang="en"/i);
   assert.match(html, /That Developer Steven/);
-  assert.match(html, /從物理、科技與系統出發/);
+  assert.match(html, /Starting with physics, technology, and systems/);
   assert.match(html, /href="\/interests"/);
   assert.match(html, /href="\/thinking"/);
   assert.match(html, /href="\/values"/);
   assert.match(html, /href="\/extensions"/);
   assert.doesNotMatch(html, /id="interests"|id="thinking"|id="values"/);
-  assert.match(html, /<button[^>]+aria-label="選擇網站語言"[^>]+aria-expanded="false"/);
+  assert.match(html, /<button[^>]+aria-label="Choose site language"[^>]+aria-expanded="false"/);
   assert.match(html, /id="language-menu-panel"/);
-  assert.match(html, /選擇語言/);
+  assert.match(html, /Choose a language/);
   assert.match(html, /🌐/);
-  assert.match(html, /href="\/en"/);
+  assert.match(html, /href="\/zh"/);
   assert.match(html, /繁體中文/);
   assert.match(html, /English/);
+  assert.doesNotMatch(html, /從物理、科技與系統出發/);
   assert.doesNotMatch(html, /aria-pressed=/);
   assert.doesNotMatch(html, /<select\b/i);
   assert.doesNotMatch(html, /href="#about"|id="about"|ABOUT THIS SPACE|A WAY OF SEEING/i);
@@ -43,13 +45,13 @@ test("server-renders the private personal digital garden", async () => {
   assert.doesNotMatch(html, /［公開顯示名稱］|\[Public Display Name\]|codex-preview|react-loading-skeleton|工作經驗|公司成就/i);
 });
 
-test("server-renders English as independent, linkable pages", async () => {
+test("server-renders Traditional Chinese as independent, linkable pages", async () => {
   const [homeResponse, interestsResponse, thinkingResponse, valuesResponse, extensionsResponse] = await Promise.all([
-    render("/en"),
-    render("/en/interests"),
-    render("/en/thinking"),
-    render("/en/values"),
-    render("/en/extensions"),
+    render("/zh"),
+    render("/zh/interests"),
+    render("/zh/thinking"),
+    render("/zh/values"),
+    render("/zh/extensions"),
   ]);
 
   for (const response of [homeResponse, interestsResponse, thinkingResponse, valuesResponse, extensionsResponse]) {
@@ -64,24 +66,24 @@ test("server-renders English as independent, linkable pages", async () => {
     extensionsResponse.text(),
   ]);
 
-  assert.match(homeHtml, /<main[^>]+lang="en"/i);
-  assert.match(homeHtml, /Starting with physics, technology, and systems/);
-  assert.match(homeHtml, /href="\/en\/interests"/);
+  assert.match(homeHtml, /<main[^>]+lang="zh-Hant"/i);
+  assert.match(homeHtml, /從物理、科技與系統出發/);
+  assert.match(homeHtml, /href="\/zh\/interests"/);
   assert.match(homeHtml, /href="\/"/);
-  assert.doesNotMatch(homeHtml, /從物理、科技與系統出發/);
+  assert.doesNotMatch(homeHtml, /Starting with physics, technology, and systems/);
 
-  assert.match(interestsHtml, /Core long-term interests/);
-  assert.match(interestsHtml, /href="\/en\/interests" aria-current="page"/);
-  assert.match(thinkingHtml, /How I think/);
-  assert.match(thinkingHtml, /href="\/en\/thinking" aria-current="page"/);
-  assert.match(valuesHtml, /The life I value/);
-  assert.match(valuesHtml, /href="\/en\/values" aria-current="page"/);
-  assert.match(extensionsHtml, /Extensions I have built/);
-  assert.match(extensionsHtml, /href="\/en\/extensions" aria-current="page"/);
+  assert.match(interestsHtml, /長期核心興趣/);
+  assert.match(interestsHtml, /href="\/zh\/interests" aria-current="page"/);
+  assert.match(thinkingHtml, /我如何思考/);
+  assert.match(thinkingHtml, /href="\/zh\/thinking" aria-current="page"/);
+  assert.match(valuesHtml, /我重視的生活/);
+  assert.match(valuesHtml, /href="\/zh\/values" aria-current="page"/);
+  assert.match(extensionsHtml, /我製作的擴充功能/);
+  assert.match(extensionsHtml, /href="\/zh\/extensions" aria-current="page"/);
   assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
 });
 
-test("server-renders each navigation destination as a separate page", async () => {
+test("server-renders each default English navigation destination as a separate page", async () => {
   const [interestsResponse, thinkingResponse, valuesResponse, extensionsResponse] = await Promise.all([
     render("/interests"),
     render("/thinking"),
@@ -101,23 +103,23 @@ test("server-renders each navigation destination as a separate page", async () =
   ]);
 
   assert.match(interestsHtml, /id="interests"/);
-  assert.match(interestsHtml, /長期核心興趣/);
-  assert.match(interestsHtml, /學習不是收集答案/);
-  assert.match(interestsHtml, /值得長期追問的問題/);
+  assert.match(interestsHtml, /Core long-term interests/);
+  assert.match(interestsHtml, /Learning is not collecting answers/);
+  assert.match(interestsHtml, /Questions worth returning to/);
   assert.match(interestsHtml, /href="\/interests" aria-current="page"/);
 
   assert.match(thinkingHtml, /id="thinking"/);
-  assert.match(thinkingHtml, /我如何思考/);
+  assert.match(thinkingHtml, /How I think/);
   assert.match(thinkingHtml, /href="\/thinking" aria-current="page"/);
   assert.doesNotMatch(thinkingHtml, /id="interests"|id="values"/);
 
   assert.match(valuesHtml, /id="values"/);
-  assert.match(valuesHtml, /我重視的生活/);
+  assert.match(valuesHtml, /The life I value/);
   assert.match(valuesHtml, /href="\/values" aria-current="page"/);
   assert.doesNotMatch(valuesHtml, /id="interests"|id="thinking"/);
 
   assert.match(extensionsHtml, /id="extensions"/);
-  assert.match(extensionsHtml, /我製作的擴充功能/);
+  assert.match(extensionsHtml, /Extensions I have built/);
   assert.match(extensionsHtml, /href="\/extensions" aria-current="page"/);
   assert.equal((extensionsHtml.match(/class="extension-card glass"/g) ?? []).length, 10);
   assert.equal((extensionsHtml.match(/aria-expanded="false" aria-controls="extension-details-\d+"/g) ?? []).length, 10);
@@ -126,4 +128,23 @@ test("server-renders each navigation destination as a separate page", async () =
   assert.match(extensionsHtml, /\.\.\/extension-icons\/website-auto-refresh\.png/);
   assert.match(extensionsHtml, /chromewebstore\.google\.com\/detail\/quotespark\/nmnfklkcpjkglpjekmjocbagneignlfi/);
   assert.doesNotMatch(extensionsHtml, /id="interests"|id="thinking"|id="values"/);
+});
+
+test("keeps the previous /en URLs as English compatibility pages", async () => {
+  const [homeResponse, extensionsResponse] = await Promise.all([
+    render("/en"),
+    render("/en/extensions"),
+  ]);
+
+  assert.equal(homeResponse.status, 200);
+  assert.equal(extensionsResponse.status, 200);
+
+  const [homeHtml, extensionsHtml] = await Promise.all([
+    homeResponse.text(),
+    extensionsResponse.text(),
+  ]);
+
+  assert.match(homeHtml, /Starting with physics, technology, and systems/);
+  assert.match(homeHtml, /href="\/interests"/);
+  assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
 });

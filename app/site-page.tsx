@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from "react";
 
 export type Language = "zh" | "en";
 export type SitePageName = "home" | "interests" | "thinking" | "values" | "extensions";
+type RoutePrefix = "" | "/en" | "/zh";
 
 function pageHref(page: SitePageName, language: Language) {
   const pagePath = page === "home" ? "" : `/${page}`;
-  return language === "en" ? `/en${pagePath}` : pagePath || "/";
+  return language === "zh" ? `/zh${pagePath}` : pagePath || "/";
 }
 
 const translations = {
@@ -208,7 +209,15 @@ const translations = {
   },
 } as const;
 
-export function SitePage({ page, language = "zh" }: { page: SitePageName; language?: Language }) {
+export function SitePage({
+  page,
+  language = "en",
+  routePrefix = "",
+}: {
+  page: SitePageName;
+  language?: Language;
+  routePrefix?: RoutePrefix;
+}) {
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageButtonRef = useRef<HTMLButtonElement>(null);
   const extensionsSectionRef = useRef<HTMLElement>(null);
@@ -217,6 +226,7 @@ export function SitePage({ page, language = "zh" }: { page: SitePageName; langua
   const [selectedExtensionIndex, setSelectedExtensionIndex] = useState<number | null>(null);
   const copy = translations[language];
   const pageTitle = page === "home" ? copy.pageTitle : `${copy.navigation[page]} | ${copy.brand}`;
+  const extensionAssetPrefix = routePrefix ? "../.." : "..";
 
   useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
@@ -537,7 +547,7 @@ export function SitePage({ page, language = "zh" }: { page: SitePageName; langua
                         <span className="extension-number">{String(index + 1).padStart(2, "0")}</span>
                         <span
                           className="extension-icon"
-                          style={{ backgroundImage: `url(${language === "en" ? "../.." : ".."}${extension.icon})` }}
+                          style={{ backgroundImage: `url(${extensionAssetPrefix}${extension.icon})` }}
                           aria-hidden="true"
                         />
                         <span className="extension-name" id={`extension-card-title-${index}`}>{extension.name}</span>
@@ -568,7 +578,7 @@ export function SitePage({ page, language = "zh" }: { page: SitePageName; langua
                       <div className="extension-wide-identity">
                         <span
                           className="extension-wide-icon"
-                          style={{ backgroundImage: `url(${language === "en" ? "../.." : ".."}${selectedExtension.icon})` }}
+                          style={{ backgroundImage: `url(${extensionAssetPrefix}${selectedExtension.icon})` }}
                           aria-hidden="true"
                         />
                         <div>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const title = "That Developer Steven｜從物理、科技與系統理解世界";
-const description = "一個記錄長期好奇心、跨領域思考、學習方法與生活價值的個人數碼花園。";
+const title = "That Developer Steven | Understanding the world through physics, technology, and systems";
+const description = "A personal digital garden about long-term curiosity, cross-disciplinary thinking, learning, and life values.";
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    locale: "zh_HK",
+    locale: "en_HK",
   },
   twitter: {
     card: "summary",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-Hant">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
