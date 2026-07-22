@@ -419,8 +419,10 @@ export function SitePage({
 
         {page === "home" ? <section className="hero about-hero glass" aria-labelledby="about-title">
           <div className="about-copy">
-            <p className="about-star" aria-hidden="true">✦</p>
-            <h1 id="about-title">{copy.about.title}</h1>
+            <div className="about-heading">
+              <p className="about-star" aria-hidden="true">✦</p>
+              <h1 id="about-title">{copy.about.title}</h1>
+            </div>
             <div className="about-body">
               {copy.about.paragraphs.map((paragraph, index) => (
                 <p className={index === 0 ? "about-intro" : undefined} key={paragraph}>{paragraph}</p>

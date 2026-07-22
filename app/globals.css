@@ -124,9 +124,10 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 28px; }
 .about-hero { display: block; min-height: 0; padding: clamp(38px, 5vw, 62px); }
 .about-copy { position: relative; z-index: 1; }
+.about-heading { display: flex; align-items: center; gap: clamp(12px, 2vw, 22px); margin-bottom: 32px; }
 .about-star, .about-hero h1 { font-size: clamp(3rem, 5vw, 5rem); }
-.about-star { margin: 0; color: var(--violet); line-height: 1; }
-.about-hero h1 { max-width: none; margin: 14px 0 32px; }
+.about-star { flex: 0 0 auto; margin: 0; color: var(--violet); line-height: 1; }
+.about-hero h1 { max-width: none; margin: 0; }
 .about-body { display: block; max-width: 1040px; }
 .about-body p { margin: 0; color: var(--muted); font-size: .91rem; line-height: 1.78; }
 .about-body p + p { margin-top: 1.78em; }
@@ -249,7 +250,7 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
   .hero h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
   .about-hero { padding: 32px 24px; }
   .about-star, .about-hero h1 { font-size: clamp(2.6rem, 14vw, 4rem); }
-  .about-hero h1 { margin-bottom: 26px; }
+  .about-heading { margin-bottom: 26px; }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 16px; }
   .system-portrait { width: 290px; height: 340px; transform: scale(.88); }
   .learning-grid { grid-template-columns: 1fr; }
