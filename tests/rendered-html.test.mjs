@@ -1,6 +1,24 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+const expectedExtensionOrder = [
+  "Better Instagram: Stop Scrolling",
+  "YouTube Search History Hider",
+  "ChatGPT Message Queue",
+  "Browser Statistic",
+  "Google Sign-out Button Blocker",
+  "Better Youtube: Reduce Distraction",
+  "Video Watch Time Statistic Pro",
+  "Video Watched Time Companion",
+  "Website Auto Refresh",
+  "QuoteSpark",
+];
+
+function renderedExtensionNames(html) {
+  return [...html.matchAll(/<span class="extension-name" id="extension-card-title-\d+">([^<]+)<\/span>/g)]
+    .map((match) => match[1]);
+}
+
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -82,6 +100,7 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
   assert.match(valuesHtml, /href="\/zh\/values" aria-current="page"/);
   assert.match(extensionsHtml, /我製作的擴充功能/);
   assert.match(extensionsHtml, /href="\/zh\/extensions" aria-current="page"/);
+  assert.deepEqual(renderedExtensionNames(extensionsHtml), expectedExtensionOrder);
   assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
 });
 
@@ -128,6 +147,7 @@ test("server-renders each default English navigation destination as a separate p
   assert.equal((extensionsHtml.match(/aria-expanded="false" aria-controls="extension-details-\d+"/g) ?? []).length, 10);
   assert.equal((extensionsHtml.match(/data-extension-panel="[01]"/g) ?? []).length, 2);
   assert.equal((extensionsHtml.match(/class="extension-wide-reveal glass"/g) ?? []).length, 2);
+  assert.deepEqual(renderedExtensionNames(extensionsHtml), expectedExtensionOrder);
   assert.match(extensionsHtml, /\.\.\/extension-icons\/website-auto-refresh\.png/);
   assert.match(extensionsHtml, /chromewebstore\.google\.com\/detail\/quotespark\/nmnfklkcpjkglpjekmjocbagneignlfi/);
   assert.doesNotMatch(extensionsHtml, /id="interests"|id="thinking"|id="values"/);
