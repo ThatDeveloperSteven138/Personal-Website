@@ -28,13 +28,12 @@ test("language menu spans the complete header width", async () => {
   assert.match(css, /\.language-menu-panel \{ width: 100%;[^}]*left: 0; right: 0;/s);
 });
 
-test("language menu waits for the pointer to reach the panel before closing", async () => {
+test("language menu stays open throughout the header and dropdown hover region", async () => {
   const source = await readFile(new URL("../app/site-page.tsx", import.meta.url), "utf8");
 
-  assert.match(source, /const LANGUAGE_MENU_CLOSE_DELAY_MS = 350;/);
-  assert.match(source, /function scheduleLanguageMenuClose\(\) \{[\s\S]*window\.setTimeout\([\s\S]*setLanguageMenuOpen\(false\);[\s\S]*LANGUAGE_MENU_CLOSE_DELAY_MS\);[\s\S]*\}/);
-  assert.match(source, /onPointerEnter=\{\(event\) => \{[\s\S]*cancelLanguageMenuClose\(\);[\s\S]*setLanguageMenuOpen\(true\);[\s\S]*\}\}/);
-  assert.match(source, /onPointerLeave=\{\(event\) => \{[\s\S]*scheduleLanguageMenuClose\(\);[\s\S]*\}\}/);
+  assert.doesNotMatch(source, /LANGUAGE_MENU_CLOSE_DELAY_MS|languageMenuCloseTimerRef|scheduleLanguageMenuClose/);
+  assert.match(source, /<header[\s\S]*?className="site-header glass"[\s\S]*?onPointerLeave=\{\(event\) => \{[\s\S]*?setLanguageMenuOpen\(false\);[\s\S]*?\}\}[\s\S]*?>/);
+  assert.match(source, /className="language-menu"[\s\S]*?onPointerEnter=\{\(event\) => \{[\s\S]*?setLanguageMenuOpen\(true\);[\s\S]*?\}\}/);
 });
 
 async function render(path = "/") {
