@@ -22,6 +22,7 @@ const translations = {
     languageMenuTitle: "選擇語言",
     languageMenuHint: "以所選語言載入整個網站",
     navigation: {
+      about: "關於我",
       interests: "長期興趣",
       thinking: "如何思考",
       values: "生活價值",
@@ -119,6 +120,7 @@ const translations = {
     languageMenuTitle: "Choose a language",
     languageMenuHint: "Load the complete site in your chosen language",
     navigation: {
+      about: "About me",
       interests: "Interests",
       thinking: "How I think",
       values: "Life values",
@@ -341,6 +343,7 @@ export function SitePage({
           </Link>
           <div className="header-actions">
             <nav aria-label={copy.navigationLabel}>
+              <Link href={pageHref("home", language)} aria-current={page === "home" ? "page" : undefined}>{copy.navigation.about}</Link>
               <Link href={pageHref("interests", language)} aria-current={page === "interests" ? "page" : undefined}>{copy.navigation.interests}</Link>
               <Link href={pageHref("thinking", language)} aria-current={page === "thinking" ? "page" : undefined}>{copy.navigation.thinking}</Link>
               <Link href={pageHref("values", language)} aria-current={page === "values" ? "page" : undefined}>{copy.navigation.values}</Link>

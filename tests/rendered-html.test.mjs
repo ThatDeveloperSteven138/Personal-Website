@@ -51,6 +51,7 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /That Developer Steven/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /Starting with physics, technology, and systems/);
+  assert.match(html, /href="\/" aria-current="page">About me<\/a>/);
   assert.match(html, /href="\/interests"/);
   assert.match(html, /href="\/thinking"/);
   assert.match(html, /href="\/values"/);
@@ -96,12 +97,14 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
 
   assert.match(homeHtml, /<main[^>]+lang="zh-Hant"/i);
   assert.match(homeHtml, /從物理、科技與系統出發/);
+  assert.match(homeHtml, /href="\/zh" aria-current="page">關於我<\/a>/);
   assert.match(homeHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(homeHtml, /href="\/zh\/interests"/);
   assert.match(homeHtml, /href="\/"/);
   assert.doesNotMatch(homeHtml, /Starting with physics, technology, and systems/);
 
   assert.match(interestsHtml, /長期核心興趣/);
+  assert.match(interestsHtml, /href="\/zh">關於我<\/a>/);
   assert.match(interestsHtml, /href="\/zh\/interests" aria-current="page"/);
   assert.match(thinkingHtml, /我如何思考/);
   assert.match(thinkingHtml, /href="\/zh\/thinking" aria-current="page"/);
@@ -136,6 +139,7 @@ test("server-renders each default English navigation destination as a separate p
   assert.match(interestsHtml, /Core long-term interests/);
   assert.match(interestsHtml, /Learning is not collecting answers/);
   assert.match(interestsHtml, /Questions worth returning to/);
+  assert.match(interestsHtml, /href="\/">About me<\/a>/);
   assert.match(interestsHtml, /href="\/interests" aria-current="page"/);
 
   assert.match(thinkingHtml, /id="thinking"/);
