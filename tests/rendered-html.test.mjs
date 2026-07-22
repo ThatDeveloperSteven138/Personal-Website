@@ -22,6 +22,7 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<html[^>]+lang="en"/i);
   assert.match(html, /<main[^>]+lang="en"/i);
   assert.match(html, /That Developer Steven/);
+  assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /Starting with physics, technology, and systems/);
   assert.match(html, /href="\/interests"/);
   assert.match(html, /href="\/thinking"/);
@@ -68,6 +69,7 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
 
   assert.match(homeHtml, /<main[^>]+lang="zh-Hant"/i);
   assert.match(homeHtml, /從物理、科技與系統出發/);
+  assert.match(homeHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(homeHtml, /href="\/zh\/interests"/);
   assert.match(homeHtml, /href="\/"/);
   assert.doesNotMatch(homeHtml, /Starting with physics, technology, and systems/);
@@ -120,6 +122,7 @@ test("server-renders each default English navigation destination as a separate p
 
   assert.match(extensionsHtml, /id="extensions"/);
   assert.match(extensionsHtml, /Extensions I have built/);
+  assert.match(extensionsHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(extensionsHtml, /href="\/extensions" aria-current="page"/);
   assert.equal((extensionsHtml.match(/class="extension-card glass"/g) ?? []).length, 10);
   assert.equal((extensionsHtml.match(/aria-expanded="false" aria-controls="extension-details-\d+"/g) ?? []).length, 10);
@@ -145,6 +148,7 @@ test("keeps the previous /en URLs as English compatibility pages", async () => {
   ]);
 
   assert.match(homeHtml, /Starting with physics, technology, and systems/);
+  assert.match(homeHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(homeHtml, /href="\/interests"/);
   assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
 });

@@ -16,6 +16,7 @@ test("exports a GitHub Pages-ready static site", async () => {
 
   assert.match(html, /<html[^>]+lang="en"/i);
   assert.match(html, /Starting with physics, technology, and systems/);
+  assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /\/personal-website\/_next\//);
   assert.match(html, /href="\/personal-website\/interests\/"/);
   assert.match(html, /href="\/personal-website\/zh\/"/);
@@ -33,6 +34,7 @@ test("exports a GitHub Pages-ready static site", async () => {
 
   assert.match(chineseHtml, /<main[^>]+lang="zh-Hant"/i);
   assert.match(chineseHtml, /從物理、科技與系統出發/);
+  assert.match(chineseHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(chineseHtml, /href="\/personal-website\/zh\/interests\/"/);
   assert.match(chineseHtml, /href="\/personal-website\/"/);
   assert.match(chineseExtensionsHtml, /我製作的擴充功能/);
@@ -43,6 +45,7 @@ test("exports a GitHub Pages-ready static site", async () => {
 
   await Promise.all([
     access(new URL("../out/favicon.svg", import.meta.url)),
+    access(new URL("../out/brand-avatar.png", import.meta.url)),
     access(new URL("../out/extension-icons/website-auto-refresh.png", import.meta.url)),
     access(new URL("../out/extension-icons/youtube-search-history-hider.png", import.meta.url)),
   ]);

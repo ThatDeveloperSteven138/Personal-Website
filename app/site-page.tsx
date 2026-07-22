@@ -227,6 +227,8 @@ export function SitePage({
   const copy = translations[language];
   const pageTitle = page === "home" ? copy.pageTitle : `${copy.navigation[page]} | ${copy.brand}`;
   const extensionAssetPrefix = routePrefix ? "../.." : "..";
+  const brandImageDepth = (routePrefix ? 1 : 0) + (page === "home" ? 0 : 1);
+  const brandImageSrc = `${"../".repeat(brandImageDepth)}brand-avatar.png`;
 
   useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-Hant" : "en";
@@ -334,7 +336,7 @@ export function SitePage({
       <div className="page-shell" data-page={page}>
         <header className="site-header glass">
           <Link className="brand" href={pageHref("home", language)} aria-label={copy.homeLabel}>
-            <span className="brand-dot" aria-hidden="true" />
+            <img className="brand-avatar" src={brandImageSrc} alt="" width="36" height="36" />
             {copy.brand}
           </Link>
           <div className="header-actions">
@@ -601,7 +603,7 @@ export function SitePage({
         </section> : null}
 
         <footer className="site-footer">
-          <div><span className="brand-dot" aria-hidden="true" />{copy.brand}</div>
+          <div><img className="brand-avatar brand-avatar-footer" src={brandImageSrc} alt="" width="28" height="28" />{copy.brand}</div>
           <p>{copy.footer.description}</p>
           <a href="#top">{copy.footer.backToTop} <span aria-hidden="true">↑</span></a>
         </footer>
