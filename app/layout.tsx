@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   title,
   description,
   icons: {
-    icon: `${siteUrl}/favicon.svg`,
-    shortcut: `${siteUrl}/favicon.svg`,
+    icon: [{ url: `${siteUrl}/brand-avatar.png`, type: "image/png", sizes: "576x576" }],
+    shortcut: `${siteUrl}/brand-avatar.png`,
+    apple: [{ url: `${siteUrl}/brand-avatar.png`, type: "image/png", sizes: "576x576" }],
   },
   openGraph: {
     title,

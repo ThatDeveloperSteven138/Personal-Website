@@ -15,6 +15,8 @@ test("exports a GitHub Pages-ready static site", async () => {
   ]);
 
   assert.match(html, /<html[^>]+lang="en"/i);
+  assert.match(html, /<link rel="icon" href="https:\/\/test-user\.github\.io\/personal-website\/brand-avatar\.png"[^>]+type="image\/png"/);
+  assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /Starting with physics, technology, and systems/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /\/personal-website\/_next\//);

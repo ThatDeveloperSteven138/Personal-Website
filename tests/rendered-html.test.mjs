@@ -49,6 +49,9 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<html[^>]+lang="en"/i);
   assert.match(html, /<main[^>]+lang="en"/i);
   assert.match(html, /That Developer Steven/);
+  assert.match(html, /<link rel="icon" href="http:\/\/localhost:3000\/brand-avatar\.png"[^>]+type="image\/png"/);
+  assert.match(html, /<link rel="shortcut icon" href="http:\/\/localhost:3000\/brand-avatar\.png"/);
+  assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /Starting with physics, technology, and systems/);
   assert.match(html, /href="\/" aria-current="page">About me<\/a>/);
