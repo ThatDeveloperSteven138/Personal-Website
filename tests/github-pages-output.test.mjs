@@ -28,7 +28,7 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.doesNotMatch(html, /property="og:image"/);
   assert.doesNotMatch(html, /http:\/\/localhost:3000/);
 
-  assert.match(interestsHtml, /Core long-term interests/);
+  assert.doesNotMatch(interestsHtml, /Core long-term interests|Learning is not collecting answers|Questions worth returning to|class="interest-card/);
   assert.match(thinkingHtml, /How I think/);
   assert.match(valuesHtml, /The life I value/);
   assert.match(extensionsHtml, /Extensions I have built/);

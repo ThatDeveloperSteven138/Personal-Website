@@ -39,50 +39,9 @@ const translations = {
         "這個網站是我分享瀏覽器擴充功能、新想法和開發進度的地方。我亦希望網站可以讓更多人認識我、交流想法，並與擁有共同興趣的人建立聯繫。",
       ],
     },
-    interests: {
-      kicker: "LONG-TERM CURIOSITIES",
-      title: "長期核心興趣",
-      intro: "這些主題彼此交疊：自然規律影響科技，科技改變制度，而制度與工具又塑造人的選擇。",
-      items: [
-        { number: "01", title: "物理與自然世界", text: "從模型、實驗、量測與誤差出發，理解科學如何建立可驗證、但有適用範圍的解釋。", tags: ["模型", "因果", "物理教育"] },
-        { number: "02", title: "人工智能與程式開發", text: "關注 AI 如何協助學習、研究與多步驟任務，也持續追問可靠性、審查權與實際生產力。", tags: ["AI", "程式設計", "智能代理"] },
-        { number: "03", title: "自動化與生活效率", text: "尋找流程中的重複、錯誤與認知負擔，設計可以重複執行、容易驗證而且不增加摩擦的工具。", tags: ["流程", "驗證", "低摩擦"] },
-        { number: "04", title: "經濟、投資與市場", text: "從利率、通脹、企業基本面與風險理解長期變化，區分短期情緒與結構性因素。", tags: ["基本面", "風險", "長期變化"] },
-        { number: "05", title: "科技產品與數碼工具", text: "在規格以外，比較穩定性、使用摩擦、隱私、支援與長期價值，判斷產品是否真正解決問題。", tags: ["產品體驗", "隱私", "長期價值"] },
-        { number: "06", title: "攝影與影像表達", text: "探索畫面如何傳遞資訊，以及器材、便攜性、影像品質、構圖與視覺層次之間的取捨。", tags: ["攝影", "構圖", "視覺敘事"] },
-        { number: "07", title: "數碼空間設計", text: "比較版面、資訊層級與介面風格，在科技感、清晰閱讀與適度視覺效果之間尋找平衡。", tags: ["介面", "Bento", "資訊層級"] },
-        { number: "08", title: "系統性學習", text: "先理解原理，再比較來源、確認定義、檢查推論與邊界，最後整理成可以反覆使用的框架。", tags: ["原理", "原始資料", "知識框架"] },
-      ],
-    },
     thinking: {
       kicker: "HOW I THINK",
       title: "我如何思考",
-    },
-    learning: {
-      kicker: "LEARNING PROCESS",
-      title: "學習不是收集答案，",
-      titleAccent: "而是建立可以更新的理解。",
-      intro: "我偏好由原理開始，沿着來源、證據和邊界逐步檢查，再把知識整理成能夠重新使用的框架。",
-      steps: [
-        ["01", "理解原理", "先問機制與定義，不急於記住結論。"],
-        ["02", "回到來源", "查看正式或原始資料，知道說法從何而來。"],
-        ["03", "比較證據", "確認不同來源是否使用相同口徑與假設。"],
-        ["04", "測試邊界", "尋找例外、極端情況與可能失效的條件。"],
-        ["05", "重新解釋", "把複雜內容整理成可以反覆使用的理解框架。"],
-      ],
-    },
-    questions: {
-      kicker: "OPEN QUESTIONS",
-      title: "值得長期追問的問題",
-      intro: "有些問題沒有快速結論，但值得在不同時間、帶着新的證據再次回來。",
-      items: [
-        "AI 應如何協助人類，而不削弱獨立思考能力？",
-        "哪些工作適合完全自動化，哪些應保留人工判斷？",
-        "科學模型在甚麼情況下能幫助日常決策？",
-        "經濟增長為甚麼未必改善所有人的生活感受？",
-        "如何在效率、準確性與人的自主權之間取得平衡？",
-        "科技應如何服務生活，而不是讓生活圍繞科技運轉？",
-      ],
     },
     values: {
       kicker: "A LIFE I VALUE",
@@ -139,50 +98,9 @@ const translations = {
         "This website is where I share my browser extensions, new ideas, and development progress. I also hope it provides an opportunity for more people to get to know me, exchange ideas, and connect over shared interests.",
       ],
     },
-    interests: {
-      kicker: "LONG-TERM CURIOSITIES",
-      title: "Core long-term interests",
-      intro: "These subjects overlap: natural laws shape technology, technology changes institutions, and institutions and tools shape the choices people make.",
-      items: [
-        { number: "01", title: "Physics and the natural world", text: "Starting from models, experiments, measurement, and uncertainty, I explore how science builds explanations that can be tested while remaining bounded by their conditions of use.", tags: ["Models", "Causality", "Physics education"] },
-        { number: "02", title: "AI and software development", text: "I study how AI can support learning, research, and multi-step work while continuing to question reliability, human oversight, and real productivity.", tags: ["AI", "Programming", "Agents"] },
-        { number: "03", title: "Automation and everyday efficiency", text: "I look for repetition, errors, and cognitive load in a process, then design tools that are repeatable, easy to verify, and low in friction.", tags: ["Process", "Verification", "Low friction"] },
-        { number: "04", title: "Economics, investing, and markets", text: "I use interest rates, inflation, business fundamentals, and risk to understand long-term change and distinguish short-term sentiment from structural forces.", tags: ["Fundamentals", "Risk", "Long-term change"] },
-        { number: "05", title: "Technology products and digital tools", text: "Beyond specifications, I compare reliability, usability, privacy, support, and long-term value to judge whether a product truly solves a problem.", tags: ["Product experience", "Privacy", "Long-term value"] },
-        { number: "06", title: "Photography and visual expression", text: "I explore how images carry information and how equipment, portability, image quality, composition, and visual depth trade off against one another.", tags: ["Photography", "Composition", "Visual storytelling"] },
-        { number: "07", title: "Designing digital spaces", text: "I compare layout, information hierarchy, and interface styles to balance a technological feel, clear reading, and purposeful visual effects.", tags: ["Interface", "Bento", "Information hierarchy"] },
-        { number: "08", title: "Systematic learning", text: "I begin with principles, compare sources, clarify definitions, test inferences and boundaries, and turn the result into a reusable framework.", tags: ["Principles", "Primary sources", "Knowledge frameworks"] },
-      ],
-    },
     thinking: {
       kicker: "HOW I THINK",
       title: "How I think",
-    },
-    learning: {
-      kicker: "LEARNING PROCESS",
-      title: "Learning is not collecting answers,",
-      titleAccent: "but building understanding that can change.",
-      intro: "I prefer to start from first principles, check sources, evidence, and boundaries step by step, then organise the knowledge into a framework I can use again.",
-      steps: [
-        ["01", "Understand the principle", "Ask about mechanisms and definitions before memorising conclusions."],
-        ["02", "Return to the source", "Consult formal or primary material and understand where a claim came from."],
-        ["03", "Compare the evidence", "Check whether different sources use the same definitions and assumptions."],
-        ["04", "Test the boundaries", "Look for exceptions, extremes, and the conditions under which an idea may fail."],
-        ["05", "Explain it again", "Turn complex material into a reusable framework for understanding."],
-      ],
-    },
-    questions: {
-      kicker: "OPEN QUESTIONS",
-      title: "Questions worth returning to",
-      intro: "Some questions do not have quick conclusions, but they are worth revisiting at different times with new evidence.",
-      items: [
-        "How should AI assist people without weakening independent thought?",
-        "Which kinds of work should be fully automated, and which should retain human judgment?",
-        "When can scientific models improve everyday decisions?",
-        "Why does economic growth not always improve how life feels for everyone?",
-        "How can we balance efficiency, accuracy, and human agency?",
-        "How can technology serve life instead of making life revolve around technology?",
-      ],
     },
     values: {
       kicker: "A LIFE I VALUE",
@@ -532,64 +450,6 @@ export function SitePage({
             </div>
           </div>
         </section> : null}
-
-        {page === "interests" ? <>
-        <section className="section-block" id="interests" aria-labelledby="interests-title">
-          <div className="section-heading">
-            <div>
-              <p className="section-kicker">{copy.interests.kicker}</p>
-              <h2 id="interests-title">{copy.interests.title}</h2>
-            </div>
-            <p>{copy.interests.intro}</p>
-          </div>
-          <div className="interest-grid">
-            {copy.interests.items.map((interest) => (
-              <article className="interest-card glass" key={interest.number}>
-                <div className="interest-top"><span>{interest.number}</span><i aria-hidden="true" /></div>
-                <h3>{interest.title}</h3>
-                <p>{interest.text}</p>
-                <div className="tag-row">
-                  {interest.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="learning-grid section-block" aria-labelledby="learning-title">
-          <div className="learning-copy glass">
-            <p className="section-kicker">{copy.learning.kicker}</p>
-            <h2 id="learning-title">{copy.learning.title}<br />{copy.learning.titleAccent}</h2>
-            <p>{copy.learning.intro}</p>
-          </div>
-          <ol className="learning-steps glass">
-            {copy.learning.steps.map(([number, title, text]) => (
-              <li key={number}>
-                <span>{number}</span><div><h3>{title}</h3><p>{text}</p></div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="question-section section-block" aria-labelledby="questions-title">
-          <div className="section-heading">
-            <div>
-              <p className="section-kicker">{copy.questions.kicker}</p>
-              <h2 id="questions-title">{copy.questions.title}</h2>
-            </div>
-            <p>{copy.questions.intro}</p>
-          </div>
-          <div className="question-list">
-            {copy.questions.items.map((question, index) => (
-              <article className="open-question glass" key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{question}</p>
-                <i aria-hidden="true">↗</i>
-              </article>
-            ))}
-          </div>
-        </section>
-        </> : null}
 
         {page === "thinking" ? <section className="thinking-section glass" id="thinking" aria-labelledby="thinking-title">
           <div className="thinking-intro">
