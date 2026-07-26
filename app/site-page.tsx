@@ -31,7 +31,7 @@ const translations = {
     about: {
       title: "關於我",
       paragraphs: [
-        "你好，我是 Steven，在網上亦稱為 Developer Steven。我是一名來自香港的 22 歲大學生，主修物理學及數據分析。",
+        "你好，我是 Steven，在網上亦稱為 Developer Steven。我是一名來自香港的大學生，主修物理學及數據分析。",
         "在大學課程和擴充功能開發以外，我喜歡閱讀、學習投資，以及維持健康而活躍的生活方式。我定期健身，也喜歡遠足、露營、踏單車和釣魚等戶外活動。我亦致力終身學習，經常探索新的 AI 工具和技能，尤其是 vibe coding。",
         "我嘗試減少使用 Facebook、Instagram 和 Threads 等社交媒體平台。研究發現，較頻繁使用短影音平台與較差的注意力、抑制控制及其他認知表現有關。然而，我不認為問題可以簡單概括為社交媒體完全有害。它的影響會因平台的使用方式、接觸的內容，以及個人控制使用時間的能力而有所不同。",
         "即使意識到這些風險，我有時仍會發現自己花在網上內容的時間超出原本預期。這個親身困擾促使我製作瀏覽器擴充功能，協助減少干擾、避免無意識滑動，並讓使用者更能掌控自己在網上的時間。",
@@ -131,7 +131,7 @@ const translations = {
     about: {
       title: "About Me",
       paragraphs: [
-        "Hi, I’m Steven, also known online as Developer Steven. I am a 22-year-old university student from Hong Kong, majoring in Physics and Data Analytics.",
+        "Hi, I’m Steven, also known online as Developer Steven. I am a university student from Hong Kong, majoring in Physics and Data Analytics.",
         "Outside of university and extension development, I enjoy reading, learning about investing, and maintaining a healthy and active lifestyle. I go to the gym regularly and enjoy outdoor activities such as hiking, camping, cycling, and fishing. I am also committed to lifelong learning and frequently explore new AI tools and skills, particularly vibe coding.",
         "I try to limit my use of social media platforms such as Facebook, Instagram, and Threads. Research has found that heavier use of short-form video platforms is associated with poorer attention, inhibitory control, and other cognitive outcomes. However, I do not believe the issue is as simple as saying that social media is entirely harmful. Its effects can vary depending on how a platform is used, what content a person consumes, and how well they are able to control their usage.",
         "Despite being conscious of these risks, I still sometimes find myself spending more time than intended on online content. This personal struggle inspired me to create browser extensions that help reduce distractions, discourage mindless scrolling, and give users greater control over how they spend their time online.",

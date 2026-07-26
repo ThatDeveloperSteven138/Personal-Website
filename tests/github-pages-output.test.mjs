@@ -18,7 +18,8 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.match(html, /<link rel="icon" href="https:\/\/test-user\.github\.io\/personal-website\/favicon-rounded\.png"[^>]+type="image\/png"[^>]+sizes="256x256"/);
   assert.doesNotMatch(html, /rel="(?:shortcut )?icon"[^>]+favicon\.svg/);
   assert.match(html, /<h1 id="about-title">About Me<\/h1>/);
-  assert.match(html, /22-year-old university student from Hong Kong/);
+  assert.match(html, /university student from Hong Kong/);
+  assert.doesNotMatch(html, /22-year-old/);
   assert.match(html, /This website is where I share my browser extensions/);
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /\/personal-website\/_next\//);
@@ -38,7 +39,8 @@ test("exports a GitHub Pages-ready static site", async () => {
 
   assert.match(chineseHtml, /<main[^>]+lang="zh-Hant"/i);
   assert.match(chineseHtml, /<h1 id="about-title">關於我<\/h1>/);
-  assert.match(chineseHtml, /來自香港的 22 歲大學生/);
+  assert.match(chineseHtml, /來自香港的大學生/);
+  assert.doesNotMatch(chineseHtml, /22 歲|22歲/);
   assert.match(chineseHtml, /<img[^>]+class="brand-avatar"[^>]+src="\.\.\/brand-avatar\.png"/);
   assert.match(chineseHtml, /href="\/personal-website\/zh\/interests\/"/);
   assert.match(chineseHtml, /href="\/personal-website\/"/);

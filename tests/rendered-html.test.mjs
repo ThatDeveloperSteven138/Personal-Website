@@ -91,7 +91,8 @@ test("server-renders English as the default language", async () => {
   assert.match(html, /<img[^>]+class="brand-avatar"[^>]+src="brand-avatar\.png"/);
   assert.match(html, /<div class="about-heading"><p class="about-star" aria-hidden="true">✦<\/p><h1 id="about-title">About Me<\/h1><\/div>/);
   assert.doesNotMatch(html, /<p class="eyebrow"[^>]*>[^<]*<span[^>]*>✦<\/span>\s*ABOUT ME/);
-  assert.match(html, /22-year-old university student from Hong Kong/);
+  assert.match(html, /university student from Hong Kong/);
+  assert.doesNotMatch(html, /22-year-old/);
   assert.match(html, /go to the gym regularly/);
   assert.match(html, /heavier use of short-form video platforms/);
   assert.match(html, /personal struggle inspired me to create browser extensions/);
@@ -144,7 +145,8 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
 
   assert.match(homeHtml, /<main[^>]+lang="zh-Hant"/i);
   assert.match(homeHtml, /<h1 id="about-title">關於我<\/h1>/);
-  assert.match(homeHtml, /來自香港的 22 歲大學生/);
+  assert.match(homeHtml, /來自香港的大學生/);
+  assert.doesNotMatch(homeHtml, /22 歲|22歲/);
   assert.match(homeHtml, /我定期健身/);
   assert.match(homeHtml, /較頻繁使用短影音平台/);
   assert.match(homeHtml, /促使我製作瀏覽器擴充功能/);
