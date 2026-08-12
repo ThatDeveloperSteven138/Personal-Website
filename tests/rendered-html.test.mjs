@@ -70,7 +70,15 @@ test("extension reveal measures its final layout and scrolls in the same animati
   assert.match(css, /\.extension-grid \{[^}]*overflow-anchor: none;/);
   assert.match(css, /\.extension-wide-reveal \{ --extension-reveal-duration: 420ms;/);
   assert.match(css, /\.extension-inline-reveal \{ --extension-reveal-duration: 320ms;/);
-  assert.match(css, /\.extension-wide-copy p, \.extension-inline-reveal p \{[^}]*white-space: pre-wrap;/);
+  assert.match(source, /function ExtensionDescription/);
+  assert.match(source, /className="extension-wide-header"/);
+  assert.match(source, /className="extension-overview-label">OVERVIEW/);
+  assert.match(css, /\.extension-wide-inner \{[^}]*flex-direction: column;/);
+  assert.match(css, /\.extension-description \{[^}]*max-width: 820px;/);
+  assert.match(css, /\.extension-description-section \{[^}]*border-top:/);
+  assert.match(source, /description\.length > 2_200/);
+  assert.match(source, /className="extension-description-columns"/);
+  assert.match(css, /\.extension-description\.is-long \.extension-description-columns \{[^}]*grid-template-columns: repeat\(2,/);
 });
 
 async function render(path = "/") {
@@ -248,7 +256,7 @@ test("server-renders each default English navigation destination as a separate p
   assert.match(extensionsHtml, /English descriptions sync with the store every six hours/);
   assert.match(extensionsHtml, /Stop scrolling on Instagram Web/);
   assert.match(extensionsHtml, /Better Instagram: Stop Scrolling helps you take control/);
-  assert.match(extensionsHtml, /Privacy &amp; data:/);
+  assert.match(extensionsHtml, /<h4>Privacy &amp; data<\/h4>/);
   assert.match(extensionsHtml, /\.\.\/extension-icons\/website-auto-refresh\.png/);
   assert.match(extensionsHtml, /chromewebstore\.google\.com\/detail\/quotespark\/nmnfklkcpjkglpjekmjocbagneignlfi/);
   assert.doesNotMatch(extensionsHtml, /id="interests"|id="thinking"|id="values"/);

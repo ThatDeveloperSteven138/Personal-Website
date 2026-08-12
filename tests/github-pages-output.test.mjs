@@ -64,7 +64,7 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.equal((extensionsHtml.match(/class="extension-users"/g) ?? []).length, extensionCatalog.length);
   assert.match(extensionsHtml, /English descriptions sync with the store every six hours/);
   assert.match(extensionsHtml, /Better Instagram: Stop Scrolling helps you take control/);
-  assert.match(extensionsHtml, /Privacy &amp; data:/);
+  assert.match(extensionsHtml, /<h4>Privacy &amp; data<\/h4>/);
   assert.match(extensionsHtml, /\.\.\/extension-icons\/better-instagram\.png/);
 
   assert.match(chineseHtml, /<main[^>]+lang="zh-Hant"/i);

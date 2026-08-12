@@ -264,6 +264,78 @@ const translations = {
   },
 } as const;
 
+function ExtensionDescription({ description }: { description: string }) {
+  const blocks = description.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean);
+  const isLongDescription = description.length > 2_200;
+
+  function renderBlock(block: string, index: number) {
+    const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+    const headingCandidate = lines[0] ?? "";
+    const hasSectionHeading = index > 0
+      && lines.length > 1
+      && headingCandidate.length <= 64
+      && (headingCandidate.endsWith(":") || !/[.!?]$/.test(headingCandidate));
+
+    if (hasSectionHeading) {
+      return <section className="extension-description-section" key={`${headingCandidate}-${index}`}>
+        <h4>{headingCandidate.replace(/:$/, "")}</h4>
+        <p>{lines.slice(1).join("\n")}</p>
+      </section>;
+    }
+
+    const isStandaloneHeading = index > 0
+      && index < blocks.length - 1
+      && lines.length === 1
+      && headingCandidate.length <= 64
+      && !/[.!?]$/.test(headingCandidate);
+    if (isStandaloneHeading) {
+      return <h4 className="extension-description-standalone" key={`${headingCandidate}-${index}`}>{headingCandidate}</h4>;
+    }
+
+    const inlineQuestionHeading = block.match(/^(.{1,64}\?)\s+-\s+([\s\S]+)$/);
+    if (index > 0 && inlineQuestionHeading) {
+      return <section className="extension-description-section" key={`${inlineQuestionHeading[1]}-${index}`}>
+        <h4>{inlineQuestionHeading[1]}</h4>
+        <p>{`- ${inlineQuestionHeading[2].replace(/\s+-\s+/g, "\n- ")}`}</p>
+      </section>;
+    }
+
+    return <p className={index === 0 ? "extension-description-lead" : undefined} key={`${block.slice(0, 40)}-${index}`}>{block}</p>;
+  }
+
+  if (!isLongDescription || blocks.length < 4) {
+    return <div className="extension-description">{blocks.map(renderBlock)}</div>;
+  }
+
+  const contentBlocks = blocks.slice(1);
+  const blockWeights = contentBlocks.map((block) => block.length + (block.match(/\n/g)?.length ?? 0) * 32 + 80);
+  const totalWeight = blockWeights.reduce((sum, weight) => sum + weight, 0);
+  let runningWeight = 0;
+  let splitOffset = 1;
+  let smallestDifference = Number.POSITIVE_INFINITY;
+  for (let index = 0; index < blockWeights.length - 1; index += 1) {
+    runningWeight += blockWeights[index];
+    const difference = Math.abs(totalWeight - runningWeight * 2);
+    if (difference < smallestDifference) {
+      smallestDifference = difference;
+      splitOffset = index + 1;
+    }
+  }
+  const splitIndex = splitOffset + 1;
+
+  return <div className="extension-description is-long">
+    {renderBlock(blocks[0], 0)}
+    <div className="extension-description-columns">
+      <div className="extension-description-column">
+        {blocks.slice(1, splitIndex).map((block, index) => renderBlock(block, index + 1))}
+      </div>
+      <div className="extension-description-column">
+        {blocks.slice(splitIndex).map((block, index) => renderBlock(block, index + splitIndex))}
+      </div>
+    </div>
+  </div>;
+}
+
 const EXTENSION_VIEWPORT_PADDING_PX = 24;
 const EXTENSION_REVEAL_EASING = [0.22, 1, 0.36, 1] as const;
 
@@ -695,8 +767,9 @@ export function SitePage({
                         </span>
                       </button>
                       <div className={`extension-inline-reveal${isExpanded ? " is-open" : ""}`} id={detailsId}>
-                        <div>
-                          <p>{extension.description}</p>
+                        <div className="extension-inline-copy">
+                          <span className="extension-overview-label">OVERVIEW</span>
+                          <ExtensionDescription description={extension.description} />
                           <a className="extension-detail-link" href={extension.storeUrl} target="_blank" rel="noreferrer" tabIndex={isExpanded ? 0 : -1}>
                             {copy.extensions.storeLabel} <span aria-hidden="true">↗</span>
                           </a>
@@ -713,25 +786,28 @@ export function SitePage({
                 >
                   <div className="extension-wide-inner">
                     {selectedExtension ? <>
-                      <div className="extension-wide-identity">
-                        <span
-                          className="extension-wide-icon"
-                          style={{ backgroundImage: `url(${extensionAssetPrefix}${selectedExtension.icon})` }}
-                          aria-hidden="true"
-                        />
-                        <div>
-                          <div className="extension-wide-meta">
-                            <span>{String((selectedExtensionIndex ?? 0) + 1).padStart(2, "0")}</span>
-                            <span className="extension-users">{selectedExtension.userLabel}</span>
+                      <div className="extension-wide-header">
+                        <div className="extension-wide-identity">
+                          <span
+                            className="extension-wide-icon"
+                            style={{ backgroundImage: `url(${extensionAssetPrefix}${selectedExtension.icon})` }}
+                            aria-hidden="true"
+                          />
+                          <div>
+                            <div className="extension-wide-meta">
+                              <span>{String((selectedExtensionIndex ?? 0) + 1).padStart(2, "0")}</span>
+                              <span className="extension-users">{selectedExtension.userLabel}</span>
+                            </div>
+                            <h3>{selectedExtension.name}</h3>
                           </div>
-                          <h3>{selectedExtension.name}</h3>
                         </div>
-                      </div>
-                      <div className="extension-wide-copy">
-                        <p>{selectedExtension.description}</p>
                         <a className="extension-detail-link" href={selectedExtension.storeUrl} target="_blank" rel="noreferrer" tabIndex={expandedInRow ? 0 : -1}>
                           {copy.extensions.storeLabel} <span aria-hidden="true">↗</span>
                         </a>
+                      </div>
+                      <div className="extension-wide-copy">
+                        <span className="extension-overview-label">OVERVIEW</span>
+                        <ExtensionDescription description={selectedExtension.description} />
                       </div>
                     </> : null}
                   </div>
