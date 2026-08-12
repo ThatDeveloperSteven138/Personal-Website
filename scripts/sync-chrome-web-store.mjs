@@ -20,6 +20,7 @@ export function normalizeOverviewDescription(value) {
     .map((line) => line.replace(/[\t ]+/g, " ").trim())
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
+    .replace(/\n+(?:See more|Show less)\s*$/i, "")
     .trim();
 }
 

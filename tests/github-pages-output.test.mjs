@@ -47,8 +47,14 @@ test("exports a GitHub Pages-ready static site", async () => {
   assert.doesNotMatch(html, /property="og:image"/);
   assert.doesNotMatch(html, /http:\/\/localhost:3000/);
 
-  assert.doesNotMatch(interestsHtml, /Core long-term interests|Learning is not collecting answers|Questions worth returning to|class="interest-card/);
+  assert.match(interestsHtml, /Hobbies &amp; interests/);
+  assert.match(interestsHtml, /Science, space &amp; psychology/);
+  assert.match(interestsHtml, /Aquatic worlds &amp; collecting/);
+  assert.equal((interestsHtml.match(/class="interest-card glass"/g) ?? []).length, 8);
   assert.match(thinkingHtml, /How I think/);
+  assert.match(thinkingHtml, /Start with first principles/);
+  assert.match(thinkingHtml, /Explain to understand/);
+  assert.equal((thinkingHtml.match(/<li>/g) ?? []).length, 5);
   assert.match(valuesHtml, /The life I value/);
   assert.match(extensionsHtml, /Extensions I have built/);
   assert.equal((extensionsHtml.match(/class="extension-card glass"/g) ?? []).length, 10);

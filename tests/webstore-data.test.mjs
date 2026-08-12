@@ -22,7 +22,7 @@ test("parses the public Chrome Web Store user-count formats used for sorting", (
 
 test("preserves the complete Overview structure while normalizing incidental spacing", () => {
   assert.equal(
-    normalizeOverviewDescription(" Short summary.\r\n\r\n  Key features: \r\n  First feature  \r\n  Second feature "),
+    normalizeOverviewDescription(" Short summary.\r\n\r\n  Key features: \r\n  First feature  \r\n  Second feature \r\n\r\n See more "),
     "Short summary.\n\nKey features:\nFirst feature\nSecond feature",
   );
 });
@@ -42,6 +42,7 @@ test("keeps the static extension catalog and generated snapshot complete and uni
     assert.ok(Number.isSafeInteger(item.userCount) && item.userCount >= 0);
     assert.match(item.userCountText, /users?$/i);
     assert.ok(item.englishDescription.length >= 10 && item.englishDescription.length <= 15_000);
+    assert.doesNotMatch(item.englishDescription, /\n(?:See more|Show less)$/i);
   }
   assert.ok(snapshot.items.some((item) => item.englishDescription.length > 500));
   assert.ok(snapshot.items.some((item) => item.englishDescription.includes("\n\n")));

@@ -60,7 +60,7 @@ const translations = {
     languageMenuHint: "以所選語言載入整個網站",
     navigation: {
       about: "關於我",
-      interests: "長期興趣",
+      interests: "興趣與習慣",
       thinking: "如何思考",
       values: "生活價值",
       extensions: "擴充功能",
@@ -76,9 +76,67 @@ const translations = {
         "這個網站是我分享瀏覽器擴充功能、新想法和開發進度的地方。我亦希望網站可以讓更多人認識我、交流想法，並與擁有共同興趣的人建立聯繫。",
       ],
     },
+    interests: {
+      kicker: "HOBBIES & INTERESTS",
+      title: "興趣與習慣",
+      intro: "這些長期投入的主題與活動，一部分幫助我理解世界，一部分讓我保持活力、創意與好奇心。",
+      items: [
+        {
+          title: "科學、宇宙與心理",
+          description: "我以物理學作為理解自然的基礎，也持續探索宇宙與人的思考和行為。",
+          tags: ["理論與應用物理", "量子與相對論", "天文與黑洞", "認知與決策", "人際關係"],
+        },
+        {
+          title: "AI、科技與創造",
+          description: "我會追蹤新科技，研究 AI 模型與 Agent，並透過自動化和自製工具解決實際問題。",
+          tags: ["ChatGPT 與 Copilot", "模型與 Agent", "自動化", "DIY 工具", "創業與 Side Project"],
+        },
+        {
+          title: "閱讀與終身學習",
+          description: "閱讀讓我接觸不同世界和觀點；學習新技能則讓好奇心逐步變成可實踐的能力。",
+          tags: ["小說與非小說", "科普", "商業書", "傳記", "持續學習新技能"],
+        },
+        {
+          title: "投資、經濟與商業",
+          description: "我關注資產配置、企業和宏觀經濟，嘗試理解市場背後的誘因、週期與取捨。",
+          tags: ["股票與 ETF", "債券與基金", "個人理財", "公司與財報", "通脹、利率與 GDP"],
+        },
+        {
+          title: "運動與自我優化",
+          description: "我以持續訓練建立健康和紀律，也會研究如何改善效率、能力與決策方式。",
+          tags: ["健身", "跑步", "力量訓練", "健康", "效率與決策"],
+        },
+        {
+          title: "影像、電影與音樂",
+          description: "我喜歡以相片和影片記錄觀察，也會主動聆聽不同音樂類型並學習結他。",
+          tags: ["攝影與構圖", "相機與手機攝影", "電影與紀錄片", "YouTube", "音樂與結他"],
+        },
+        {
+          title: "戶外與探索",
+          description: "旅行和戶外活動讓我離開熟悉環境，以更直接的方式認識地方、自然和自己。",
+          tags: ["旅行規劃", "背包旅行", "遠足與登山", "露營", "單車與釣魚"],
+        },
+        {
+          title: "水族造景與收藏",
+          description: "我對微型生態、造景和天然物件感興趣，享受觀察細節與設計平衡的過程。",
+          tags: ["水族養魚", "魚蝦與水生生物", "Aquascaping", "沉木與石材", "礦石與晶體"],
+        },
+      ],
+    },
     thinking: {
       kicker: "HOW I THINK",
       title: "我如何思考",
+      intro: "我的思考由好奇心開始，再以第一性原理、證據和實際嘗試逐步收窄問題。我用邏輯尋找缺口，以批判思考判斷資訊是否可靠，並透過簡單解釋檢驗自己是否真正理解。",
+      methodKicker: "A WORKING METHOD",
+      methodTitle: "保持好奇、結構清晰，並落到實處",
+      methodBody: "物理訓練我由假設和限制出發，數據分析提醒我分辨直覺與證據，而製作工具則讓我把想法放進真實情境中測試。",
+      principles: [
+        { title: "從第一性原理開始", description: "先拆解既有假設，找出真正的限制、目標和不可再簡化的部分。" },
+        { title: "沿着證據與邏輯前進", description: "檢查論證是否合理、資料是否足夠，並主動尋找反例和邏輯漏洞。" },
+        { title: "透過解釋深化理解", description: "嘗試用簡單語言教懂別人；如果說不清楚，通常代表自己的理解仍有缺口。" },
+        { title: "看見誘因與取捨", description: "在談判、商業和日常決策中，同時考慮各方利益、成本和可能的次級影響。" },
+        { title: "建立、測試、再改進", description: "把想法做成工具、自動化或小型實驗，根據實際結果反覆修正。" },
+      ],
     },
     values: {
       kicker: "A LIFE I VALUE",
@@ -108,7 +166,7 @@ const translations = {
     languageMenuHint: "Load the complete site in your chosen language",
     navigation: {
       about: "About me",
-      interests: "Interests",
+      interests: "Hobbies",
       thinking: "How I think",
       values: "Life values",
       extensions: "Extensions",
@@ -124,9 +182,67 @@ const translations = {
         "This website is where I share my browser extensions, new ideas, and development progress. I also hope it provides an opportunity for more people to get to know me, exchange ideas, and connect over shared interests.",
       ],
     },
+    interests: {
+      kicker: "HOBBIES & INTERESTS",
+      title: "Hobbies & interests",
+      intro: "The subjects and activities I return to—some help me understand the world, while others keep me active, creative, and curious.",
+      items: [
+        {
+          title: "Science, space & psychology",
+          description: "Physics is my foundation for understanding nature, and I keep exploring both the universe and how people think and behave.",
+          tags: ["Theoretical & applied physics", "Quantum & relativity", "Astronomy & black holes", "Cognition & decisions", "Human relationships"],
+        },
+        {
+          title: "AI, technology & making",
+          description: "I follow emerging technology, study AI models and agents, and use automation and small tools to solve practical problems.",
+          tags: ["ChatGPT & Copilot", "Models & agents", "Automation", "DIY tools", "Startups & side projects"],
+        },
+        {
+          title: "Reading & lifelong learning",
+          description: "Reading exposes me to different worlds and viewpoints; learning new skills turns curiosity into something I can apply.",
+          tags: ["Fiction & nonfiction", "Popular science", "Business books", "Biographies", "Learning new skills"],
+        },
+        {
+          title: "Investing, economics & business",
+          description: "I study asset allocation, companies, and the wider economy to understand the incentives, cycles, and trade-offs behind markets.",
+          tags: ["Stocks & ETFs", "Bonds & funds", "Personal finance", "Companies & financials", "Inflation, rates & GDP"],
+        },
+        {
+          title: "Training & self-improvement",
+          description: "Consistent training helps me build health and discipline, while self-improvement helps me refine how I work and decide.",
+          tags: ["Fitness", "Running", "Strength training", "Health", "Efficiency & decisions"],
+        },
+        {
+          title: "Photography, film & music",
+          description: "I enjoy recording observations through images and video, listening closely to different genres, and learning guitar.",
+          tags: ["Photography & composition", "Cameras & mobile photography", "Film & documentaries", "YouTube", "Music & guitar"],
+        },
+        {
+          title: "Outdoor exploration",
+          description: "Travel and outdoor activities take me beyond familiar settings and offer a direct way to learn about places, nature, and myself.",
+          tags: ["Travel planning", "Backpacking", "Hiking", "Camping", "Cycling & fishing"],
+        },
+        {
+          title: "Aquatic worlds & collecting",
+          description: "I am drawn to miniature ecosystems, aquascaping, and natural objects—the details and balance reward patient observation.",
+          tags: ["Aquarium keeping", "Fish, shrimp & aquatic life", "Aquascaping", "Wood & stone", "Minerals & crystals"],
+        },
+      ],
+    },
     thinking: {
       kicker: "HOW I THINK",
       title: "How I think",
+      intro: "My thinking starts with curiosity, then narrows a problem through first principles, evidence, and practical experiments. I use logic to find gaps, critical thinking to judge whether information is trustworthy, and simple explanations to test whether I truly understand.",
+      methodKicker: "A WORKING METHOD",
+      methodTitle: "Curious, structured, and practical",
+      methodBody: "Physics taught me to begin with assumptions and constraints, data analysis reminds me to separate intuition from evidence, and building tools lets me test ideas in real situations.",
+      principles: [
+        { title: "Start with first principles", description: "Break down inherited assumptions and identify the real goal, constraints, and irreducible parts of a problem." },
+        { title: "Follow evidence and logic", description: "Check whether an argument is coherent and the evidence sufficient, while actively looking for counterexamples and gaps." },
+        { title: "Explain to understand", description: "Try to teach a complex idea in simple language; if I cannot explain it clearly, my own understanding probably has gaps." },
+        { title: "Map incentives and trade-offs", description: "In negotiation, business, and everyday decisions, consider each side's interests, costs, and likely second-order effects." },
+        { title: "Build, test, and refine", description: "Turn ideas into tools, automations, or small experiments, then revise them using what happens in practice." },
+      ],
     },
     values: {
       kicker: "A LIFE I VALUE",
@@ -468,11 +584,50 @@ export function SitePage({
           </div>
         </section> : null}
 
+        {page === "interests" ? <section className="interests-section section-block" id="interests" aria-labelledby="interests-title">
+          <div className="section-heading">
+            <div>
+              <p className="section-kicker">{copy.interests.kicker}</p>
+              <h2 id="interests-title">{copy.interests.title}</h2>
+            </div>
+            <p>{copy.interests.intro}</p>
+          </div>
+          <div className="interest-grid">
+            {copy.interests.items.map((interest, index) => (
+              <article className="interest-card glass" key={interest.title}>
+                <div className="interest-top"><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" /></div>
+                <h3>{interest.title}</h3>
+                <p>{interest.description}</p>
+                <div className="tag-row">
+                  {interest.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section> : null}
+
         {page === "thinking" ? <section className="thinking-section glass" id="thinking" aria-labelledby="thinking-title">
           <div className="thinking-intro">
             <p className="section-kicker">{copy.thinking.kicker}</p>
             <h2 id="thinking-title">{copy.thinking.title}</h2>
+            <p>{copy.thinking.intro}</p>
           </div>
+        </section> : null}
+
+        {page === "thinking" ? <section className="learning-grid thinking-principles" aria-labelledby="thinking-method-title">
+          <article className="learning-copy glass">
+            <p className="section-kicker">{copy.thinking.methodKicker}</p>
+            <h2 id="thinking-method-title">{copy.thinking.methodTitle}</h2>
+            <p>{copy.thinking.methodBody}</p>
+          </article>
+          <ol className="learning-steps glass">
+            {copy.thinking.principles.map((principle, index) => (
+              <li key={principle.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div><h3>{principle.title}</h3><p>{principle.description}</p></div>
+              </li>
+            ))}
+          </ol>
         </section> : null}
 
         {page === "values" ? <section className="values-section glass" id="values" aria-labelledby="values-title">

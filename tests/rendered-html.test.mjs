@@ -172,8 +172,15 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
 
   assert.match(interestsHtml, /href="\/zh">關於我<\/a>/);
   assert.match(interestsHtml, /href="\/zh\/interests" aria-current="page"/);
-  assert.doesNotMatch(interestsHtml, /長期核心興趣|學習不是收集答案|值得長期追問的問題|class="interest-card/);
+  assert.match(interestsHtml, /興趣與習慣/);
+  assert.match(interestsHtml, /科學、宇宙與心理/);
+  assert.match(interestsHtml, /投資、經濟與商業/);
+  assert.match(interestsHtml, /水族造景與收藏/);
+  assert.equal((interestsHtml.match(/class="interest-card glass"/g) ?? []).length, 8);
   assert.match(thinkingHtml, /我如何思考/);
+  assert.match(thinkingHtml, /從第一性原理開始/);
+  assert.match(thinkingHtml, /透過解釋深化理解/);
+  assert.equal((thinkingHtml.match(/<li>/g) ?? []).length, 5);
   assert.match(thinkingHtml, /href="\/zh\/thinking" aria-current="page"/);
   assert.match(valuesHtml, /我重視的生活/);
   assert.match(valuesHtml, /href="\/zh\/values" aria-current="page"/);
@@ -208,11 +215,18 @@ test("server-renders each default English navigation destination as a separate p
 
   assert.match(interestsHtml, /href="\/">About me<\/a>/);
   assert.match(interestsHtml, /href="\/interests" aria-current="page"/);
-  assert.doesNotMatch(interestsHtml, /Core long-term interests|Learning is not collecting answers|Questions worth returning to|class="interest-card/);
+  assert.match(interestsHtml, /Hobbies &amp; interests/);
+  assert.match(interestsHtml, /Science, space &amp; psychology/);
+  assert.match(interestsHtml, /Investing, economics &amp; business/);
+  assert.match(interestsHtml, /Aquatic worlds &amp; collecting/);
+  assert.equal((interestsHtml.match(/class="interest-card glass"/g) ?? []).length, 8);
 
   assert.match(thinkingHtml, /id="thinking"/);
   assert.match(thinkingHtml, /How I think/);
   assert.match(thinkingHtml, /href="\/thinking" aria-current="page"/);
+  assert.match(thinkingHtml, /Start with first principles/);
+  assert.match(thinkingHtml, /Explain to understand/);
+  assert.equal((thinkingHtml.match(/<li>/g) ?? []).length, 5);
   assert.doesNotMatch(thinkingHtml, /id="interests"|id="values"/);
 
   assert.match(valuesHtml, /id="values"/);
