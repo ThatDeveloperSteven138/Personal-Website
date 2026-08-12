@@ -4,15 +4,18 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 0,6,12,18 * * *"
+      timezone: "Asia/Hong_Kong"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -20,6 +23,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -32,6 +37,27 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install the Web Store browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Refresh Chrome Web Store data
+        id: webstore
+        run: npm run sync:webstore
+
+      - name: Verify Web Store data
+        run: npm run test:data
+
+      - name: Save changed Web Store data
+        if: steps.webstore.outputs.should_commit == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/chrome-web-store.json
+          git commit -m "Refresh Chrome Web Store data"
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Determine public website URL
         shell: bash

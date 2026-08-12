@@ -200,7 +200,9 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .extension-row.has-active .extension-card.is-after-active { transform: translateX(14px) rotate(.35deg); }
 .extension-card > button { width: 100%; min-height: 252px; padding: 20px; display: flex; flex-direction: column; align-items: flex-start; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .extension-card > button:focus-visible { outline: 2px solid rgba(128, 103, 216, 0.55); outline-offset: -4px; border-radius: 24px; }
-.extension-number { align-self: flex-end; color: #7d8797; font: 0.64rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+.extension-card-meta { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.extension-number { color: #7d8797; font: 0.64rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+.extension-users { display: inline-flex; align-items: center; border-radius: 999px; background: rgba(103, 84, 168, .1); color: #6754a8; padding: 5px 8px; font-size: .65rem; font-weight: 780; line-height: 1; white-space: nowrap; }
 .extension-icon { width: 88px; height: 88px; flex: 0 0 auto; margin: 8px 0 22px; border-radius: 20px; background-position: center; background-repeat: no-repeat; background-size: contain; box-shadow: 0 12px 28px rgba(49, 56, 89, 0.14); }
 .extension-name { min-height: 3.5em; font-size: 1rem; font-weight: 750; letter-spacing: -0.025em; line-height: 1.38; }
 .extension-toggle { width: 100%; display: flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 18px; color: #6754a8; font-size: 0.7rem; font-weight: 750; }
@@ -213,7 +215,8 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .extension-wide-reveal.is-open .extension-wide-inner { padding-top: 34px; padding-bottom: 34px; }
 .extension-wide-identity { display: flex; align-items: center; gap: 24px; min-width: 0; }
 .extension-wide-icon { width: 112px; height: 112px; flex: 0 0 auto; border-radius: 25px; background-position: center; background-repeat: no-repeat; background-size: contain; box-shadow: 0 16px 34px rgba(49, 56, 89, 0.16); }
-.extension-wide-identity > div > span { color: #7d8797; font: 0.65rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+.extension-wide-meta { display: flex; align-items: center; gap: 10px; color: #7d8797; font: 0.65rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+.extension-wide-meta .extension-users { font-family: inherit; }
 .extension-wide-identity h3 { margin: 8px 0 0; font-size: clamp(1.35rem, 2.2vw, 2rem); letter-spacing: -.045em; line-height: 1.16; }
 .extension-wide-copy { border-left: 1px solid var(--soft-line); padding-left: clamp(28px, 4vw, 52px); }
 .extension-wide-copy p, .extension-inline-reveal p { margin: 0 0 20px; color: var(--muted); line-height: 1.78; }

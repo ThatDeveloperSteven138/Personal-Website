@@ -2,10 +2,47 @@
 
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import extensionCatalog from "../data/extensions.json";
+import webStoreSnapshot from "../data/chrome-web-store.json";
 
 export type Language = "zh" | "en";
 export type SitePageName = "home" | "interests" | "thinking" | "values" | "extensions";
 type RoutePrefix = "" | "/en" | "/zh";
+type ExtensionCatalogItem = (typeof extensionCatalog)[number];
+type WebStoreItem = {
+  id: string;
+  userCount: number;
+  userCountText: string;
+  englishDescription: string;
+};
+
+const EXTENSIONS_PER_ROW = 5;
+const webStoreItemsById = new Map(
+  (webStoreSnapshot.items as WebStoreItem[]).map((item) => [item.id, item]),
+);
+
+function extensionUserLabel(item: WebStoreItem | undefined, language: Language, unavailable: string) {
+  if (!item) return unavailable;
+  const quantity = item.userCountText.replace(/\s+users?$/i, "");
+  return language === "zh" ? `${quantity} 位使用者` : item.userCountText;
+}
+
+function extensionItems(language: Language, unavailable: string) {
+  return extensionCatalog
+    .map((extension: ExtensionCatalogItem, catalogIndex) => {
+      const storeData = webStoreItemsById.get(extension.id);
+      return {
+        ...extension,
+        catalogIndex,
+        userCount: storeData?.userCount ?? -1,
+        userLabel: extensionUserLabel(storeData, language, unavailable),
+        // The official English short description is authoritative for both language views.
+        // The localized catalog text remains a resilient fallback for the initial or failed sync state.
+        description: storeData?.englishDescription ?? extension.fallbackDescription[language],
+      };
+    })
+    .sort((left, right) => right.userCount - left.userCount || left.catalogIndex - right.catalogIndex);
+}
 
 function pageHref(page: SitePageName, language: Language) {
   const pagePath = page === "home" ? "" : `/${page}`;
@@ -50,22 +87,11 @@ const translations = {
     extensions: {
       kicker: "BROWSER EXTENSIONS",
       title: "我製作的擴充功能",
-      intro: "一些由實際需要出發的瀏覽器工具，涵蓋專注力、使用統計、自動化與日常效率。點擊卡片可查看簡介與 Chrome Web Store 連結。",
+      intro: "按 Chrome Web Store 公開使用者數量由多至少排列；英文簡介會每六小時與商店頁面同步。點擊卡片可查看詳情。",
       showDetails: "展開簡介",
       hideDetails: "收起簡介",
       storeLabel: "前往 Chrome Web Store",
-      items: [
-        { name: "Better Instagram: Stop Scrolling", description: "停止在 Instagram 網頁版無意義滑動：隱藏廣告與推薦內容、淡化未追蹤貼文、灰階模式、Reels 計時器與統計、深色模式。", storeUrl: "https://chromewebstore.google.com/detail/better-instagram-stop-scr/hbaefnliifnjeegbijmkjognpfcgcjja", icon: "/extension-icons/better-instagram.png" },
-        { name: "YouTube Search History Hider", description: "隱藏 YouTube 搜尋下拉選單中的搜尋記錄建議，但不會刪除或修改實際記錄。", storeUrl: "https://chromewebstore.google.com/detail/youtube-search-history-hi/odblhgiogpigmabbjoekkhlbfiommljo", icon: "/extension-icons/youtube-search-history-hider.png" },
-        { name: "ChatGPT Message Queue", description: "在 ChatGPT 仍在回應時預先排隊後續提示，讓對話流程不中斷。", storeUrl: "https://chromewebstore.google.com/detail/chatgpt-message-queue/bdeaocefmnkeinfiknfeahpghemjjgjo", icon: "/extension-icons/chatgpt-message-queue.png" },
-        { name: "Browser Statistic", description: "記錄造訪的網站、停留時間、新分頁網站開啟次數，以及瀏覽器啟動後開啟的第一個網站。", storeUrl: "https://chromewebstore.google.com/detail/browser-statistic/aanphhcamfkdoddabpndlehafpnlihgb", icon: "/extension-icons/browser-statistic.png" },
-        { name: "Google Sign-out Button Blocker", description: "隱藏 Google 與 YouTube 帳戶選單中的登出項目，減少意外登出。", storeUrl: "https://chromewebstore.google.com/detail/google-sign-out-button-bl/gihgdlmihjffijgdcphogioneecekpdl", icon: "/extension-icons/google-signout-blocker.png" },
-        { name: "Better Youtube: Reduce Distraction", description: "透過依頁面分類的開關、多語言 popup 控制和觀看時間工具，減少 YouTube 干擾。", storeUrl: "https://chromewebstore.google.com/detail/better-youtube-reduce-dis/ekgikkblidfggbmadhdbepnikknmdgmk", icon: "/extension-icons/better-youtube.png" },
-        { name: "Video Watch Time Statistic Pro", description: "以多種指標與歷史報告，專業追蹤不同網站的影片觀看時間。", storeUrl: "https://chromewebstore.google.com/detail/video-watch-time-statisti/jglhflgbojcnjjjlombjijgmkpeafmem", icon: "/extension-icons/video-watch-time-pro.png" },
-        { name: "Video Watched Time Companion", description: "透過可自訂顯示的即時浮動計時器，追蹤、量度及監察影片觀看時間。", storeUrl: "https://chromewebstore.google.com/detail/video-watched-time-compan/kgldileenmeldkmlefmgoebbfeckcihl", icon: "/extension-icons/video-watched-time-companion.png" },
-        { name: "Website Auto Refresh", description: "自動重新整理指定的瀏覽器分頁，並監察重要的頁面變化，無需逐頁手動重新載入。", storeUrl: "https://chromewebstore.google.com/detail/website-auto-refresh/ehhijipfiopdlmhglhhkbhndaodfnfdj", icon: "/extension-icons/website-auto-refresh.png" },
-        { name: "QuoteSpark", description: "純黑新分頁，顯示 10 種主要語言的隨機名言和作者。", storeUrl: "https://chromewebstore.google.com/detail/quotespark/nmnfklkcpjkglpjekmjocbagneignlfi", icon: "/extension-icons/quotespark.png" },
-      ],
+      userCountUnavailable: "使用者數量暫未提供",
     },
     footer: {
       description: "一個持續學習、整理思想與記錄探索的個人空間。",
@@ -109,22 +135,11 @@ const translations = {
     extensions: {
       kicker: "BROWSER EXTENSIONS",
       title: "Extensions I have built",
-      intro: "Browser tools created from practical needs across focus, usage statistics, automation, and everyday efficiency. Select a card to see its introduction and Chrome Web Store link.",
+      intro: "Sorted by public Chrome Web Store users, from highest to lowest. English descriptions sync with the store every six hours. Select a card for details.",
       showDetails: "Show details",
       hideDetails: "Hide details",
       storeLabel: "Open in Chrome Web Store",
-      items: [
-        { name: "Better Instagram: Stop Scrolling", description: "Stop scrolling on Instagram Web: hide ads and suggestions, dim posts from accounts you do not follow, use grayscale mode, view a Reels timer and statistics, and enable Dark Mode.", storeUrl: "https://chromewebstore.google.com/detail/better-instagram-stop-scr/hbaefnliifnjeegbijmkjognpfcgcjja", icon: "/extension-icons/better-instagram.png" },
-        { name: "YouTube Search History Hider", description: "Hide YouTube search-history suggestions from the search dropdown without deleting or changing the underlying history.", storeUrl: "https://chromewebstore.google.com/detail/youtube-search-history-hi/odblhgiogpigmabbjoekkhlbfiommljo", icon: "/extension-icons/youtube-search-history-hider.png" },
-        { name: "ChatGPT Message Queue", description: "Queue follow-up prompts while ChatGPT is still responding.", storeUrl: "https://chromewebstore.google.com/detail/chatgpt-message-queue/bdeaocefmnkeinfiknfeahpghemjjgjo", icon: "/extension-icons/chatgpt-message-queue.png" },
-        { name: "Browser Statistic", description: "Track visited sites, dwell time, new-tab site opens, and the first site opened after browser startup.", storeUrl: "https://chromewebstore.google.com/detail/browser-statistic/aanphhcamfkdoddabpndlehafpnlihgb", icon: "/extension-icons/browser-statistic.png" },
-        { name: "Google Sign-out Button Blocker", description: "Hide account-menu sign-out entries on Google and YouTube pages to reduce accidental sign-outs.", storeUrl: "https://chromewebstore.google.com/detail/google-sign-out-button-bl/gihgdlmihjffijgdcphogioneecekpdl", icon: "/extension-icons/google-signout-blocker.png" },
-        { name: "Better Youtube: Reduce Distraction", description: "Reduce YouTube distractions with page-based toggles, multilingual popup controls, and watch-time tools.", storeUrl: "https://chromewebstore.google.com/detail/better-youtube-reduce-dis/ekgikkblidfggbmadhdbepnikknmdgmk", icon: "/extension-icons/better-youtube.png" },
-        { name: "Video Watch Time Statistic Pro", description: "Professional video watch-time tracking with multiple metrics and historical reports.", storeUrl: "https://chromewebstore.google.com/detail/video-watch-time-statisti/jglhflgbojcnjjjlombjijgmkpeafmem", icon: "/extension-icons/video-watch-time-pro.png" },
-        { name: "Video Watched Time Companion", description: "Track, measure, and monitor video watch time through a real-time overlay timer with customizable display options.", storeUrl: "https://chromewebstore.google.com/detail/video-watched-time-compan/kgldileenmeldkmlefmgoebbfeckcihl", icon: "/extension-icons/video-watched-time-companion.png" },
-        { name: "Website Auto Refresh", description: "Keep selected browser tabs up to date and monitor important page changes without manually reloading each page.", storeUrl: "https://chromewebstore.google.com/detail/website-auto-refresh/ehhijipfiopdlmhglhhkbhndaodfnfdj", icon: "/extension-icons/website-auto-refresh.png" },
-        { name: "QuoteSpark", description: "A pure-black new-tab page displaying a random quote and author in 10 major languages.", storeUrl: "https://chromewebstore.google.com/detail/quotespark/nmnfklkcpjkglpjekmjocbagneignlfi", icon: "/extension-icons/quotespark.png" },
-      ],
+      userCountUnavailable: "User count unavailable",
     },
     footer: {
       description: "A personal space for continued learning, organising ideas, and recording exploration.",
@@ -205,6 +220,8 @@ export function SitePage({
   const [expandedExtensionIndex, setExpandedExtensionIndex] = useState<number | null>(null);
   const [selectedExtensionIndex, setSelectedExtensionIndex] = useState<number | null>(null);
   const copy = translations[language];
+  const sortedExtensions = extensionItems(language, copy.extensions.userCountUnavailable);
+  const extensionRowCount = Math.ceil(sortedExtensions.length / EXTENSIONS_PER_ROW);
   const pageTitle = page === "home" ? copy.pageTitle : `${copy.navigation[page]} | ${copy.brand}`;
   const extensionAssetPrefix = routePrefix ? "../.." : "..";
   const brandImageDepth = (routePrefix ? 1 : 0) + (page === "home" ? 0 : 1);
@@ -247,7 +264,7 @@ export function SitePage({
       if (!section) return;
 
       const activeCard = section.querySelector(`[data-extension-index="${activeIndex}"]`);
-      const activePanel = section.querySelector(`[data-extension-panel="${Math.floor(activeIndex / 5)}"]`);
+      const activePanel = section.querySelector(`[data-extension-panel="${Math.floor(activeIndex / EXTENSIONS_PER_ROW)}"]`);
       if (!activeCard?.contains(target) && !activePanel?.contains(target)) {
         setExpandedExtensionIndex(null);
       }
@@ -282,7 +299,7 @@ export function SitePage({
     const mobileLayout = window.matchMedia("(max-width: 720px)").matches;
     const targetSelector = mobileLayout
       ? `[data-extension-index="${activeIndex}"]`
-      : `[data-extension-panel="${Math.floor(activeIndex / 5)}"]`;
+      : `[data-extension-panel="${Math.floor(activeIndex / EXTENSIONS_PER_ROW)}"]`;
     const liveTarget = section.querySelector<HTMLElement>(targetSelector);
     if (!liveTarget) return;
 
@@ -474,15 +491,15 @@ export function SitePage({
             <p>{copy.extensions.intro}</p>
           </div>
           <div className="extension-grid">
-            {[0, 1].map((rowIndex) => {
-              const rowStartIndex = rowIndex * 5;
-              const rowExtensions = copy.extensions.items.slice(rowStartIndex, rowStartIndex + 5);
+            {Array.from({ length: extensionRowCount }, (_, rowIndex) => {
+              const rowStartIndex = rowIndex * EXTENSIONS_PER_ROW;
+              const rowExtensions = sortedExtensions.slice(rowStartIndex, rowStartIndex + EXTENSIONS_PER_ROW);
               const expandedInRow = expandedExtensionIndex !== null
-                && Math.floor(expandedExtensionIndex / 5) === rowIndex;
+                && Math.floor(expandedExtensionIndex / EXTENSIONS_PER_ROW) === rowIndex;
               const selectedInRow = selectedExtensionIndex !== null
-                && Math.floor(selectedExtensionIndex / 5) === rowIndex;
+                && Math.floor(selectedExtensionIndex / EXTENSIONS_PER_ROW) === rowIndex;
               const selectedExtension = selectedInRow
-                ? copy.extensions.items[selectedExtensionIndex]
+                ? sortedExtensions[selectedExtensionIndex]
                 : null;
 
               return <div className="extension-row-group" key={rowIndex}>
@@ -498,7 +515,8 @@ export function SitePage({
                     return <article
                       className={`extension-card glass${positionClass}`}
                       data-extension-index={index}
-                      key={extension.name}
+                      data-extension-id={extension.id}
+                      key={extension.id}
                     >
                       <button
                         type="button"
@@ -506,7 +524,10 @@ export function SitePage({
                         aria-controls={detailsId}
                         onClick={() => toggleExtension(index)}
                       >
-                        <span className="extension-number">{String(index + 1).padStart(2, "0")}</span>
+                        <span className="extension-card-meta">
+                          <span className="extension-number">{String(index + 1).padStart(2, "0")}</span>
+                          <span className="extension-users">{extension.userLabel}</span>
+                        </span>
                         <span
                           className="extension-icon"
                           style={{ backgroundImage: `url(${extensionAssetPrefix}${extension.icon})` }}
@@ -544,7 +565,10 @@ export function SitePage({
                           aria-hidden="true"
                         />
                         <div>
-                          <span>{String((selectedExtensionIndex ?? 0) + 1).padStart(2, "0")}</span>
+                          <div className="extension-wide-meta">
+                            <span>{String((selectedExtensionIndex ?? 0) + 1).padStart(2, "0")}</span>
+                            <span className="extension-users">{selectedExtension.userLabel}</span>
+                          </div>
                           <h3>{selectedExtension.name}</h3>
                         </div>
                       </div>

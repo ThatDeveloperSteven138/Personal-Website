@@ -2,21 +2,27 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const expectedExtensionOrder = [
-  "Better Instagram: Stop Scrolling",
-  "YouTube Search History Hider",
-  "ChatGPT Message Queue",
-  "Browser Statistic",
-  "Google Sign-out Button Blocker",
-  "Better Youtube: Reduce Distraction",
-  "Video Watch Time Statistic Pro",
-  "Video Watched Time Companion",
-  "Website Auto Refresh",
-  "QuoteSpark",
-];
+const [extensionCatalog, webStoreSnapshot] = await Promise.all([
+  readFile(new URL("../data/extensions.json", import.meta.url), "utf8").then(JSON.parse),
+  readFile(new URL("../data/chrome-web-store.json", import.meta.url), "utf8").then(JSON.parse),
+]);
+const webStoreItemsById = new Map(webStoreSnapshot.items.map((item) => [item.id, item]));
+const expectedExtensionOrder = extensionCatalog
+  .map((extension, catalogIndex) => ({
+    ...extension,
+    catalogIndex,
+    userCount: webStoreItemsById.get(extension.id)?.userCount ?? -1,
+  }))
+  .sort((left, right) => right.userCount - left.userCount || left.catalogIndex - right.catalogIndex)
+  .map((extension) => extension.name);
 
 function renderedExtensionNames(html) {
   return [...html.matchAll(/<span class="extension-name" id="extension-card-title-\d+">([^<]+)<\/span>/g)]
+    .map((match) => match[1]);
+}
+
+function renderedExtensionUsers(html) {
+  return [...html.matchAll(/<span class="extension-users">([^<]+)<\/span>/g)]
     .map((match) => match[1]);
 }
 
@@ -168,6 +174,10 @@ test("server-renders Traditional Chinese as independent, linkable pages", async 
   assert.match(extensionsHtml, /我製作的擴充功能/);
   assert.match(extensionsHtml, /href="\/zh\/extensions" aria-current="page"/);
   assert.deepEqual(renderedExtensionNames(extensionsHtml), expectedExtensionOrder);
+  assert.equal(renderedExtensionUsers(extensionsHtml).length, extensionCatalog.length);
+  assert.ok(renderedExtensionUsers(extensionsHtml).every((label) => /位使用者$/.test(label)));
+  assert.match(extensionsHtml, /英文簡介會每六小時與商店頁面同步/);
+  assert.match(extensionsHtml, /Stop scrolling on Instagram Web/);
   assert.match(extensionsHtml, /\.\.\/\.\.\/extension-icons\/website-auto-refresh\.png/);
 });
 
@@ -213,6 +223,10 @@ test("server-renders each default English navigation destination as a separate p
   assert.equal((extensionsHtml.match(/data-extension-panel="[01]"/g) ?? []).length, 2);
   assert.equal((extensionsHtml.match(/class="extension-wide-reveal glass"/g) ?? []).length, 2);
   assert.deepEqual(renderedExtensionNames(extensionsHtml), expectedExtensionOrder);
+  assert.equal(renderedExtensionUsers(extensionsHtml).length, extensionCatalog.length);
+  assert.ok(renderedExtensionUsers(extensionsHtml).every((label) => /users?$/.test(label)));
+  assert.match(extensionsHtml, /English descriptions sync with the store every six hours/);
+  assert.match(extensionsHtml, /Stop scrolling on Instagram Web/);
   assert.match(extensionsHtml, /\.\.\/extension-icons\/website-auto-refresh\.png/);
   assert.match(extensionsHtml, /chromewebstore\.google\.com\/detail\/quotespark\/nmnfklkcpjkglpjekmjocbagneignlfi/);
   assert.doesNotMatch(extensionsHtml, /id="interests"|id="thinking"|id="values"/);

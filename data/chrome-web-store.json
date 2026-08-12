@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-08-12T13:24:56.892Z",
+  "items": [
+    {
+      "id": "hbaefnliifnjeegbijmkjognpfcgcjja",
+      "userCount": 199,
+      "userCountText": "199 users",
+      "englishDescription": "Stop scrolling on Instagram Web: hide ads/suggestions, dim non-followed posts, grayscale, Reels timer and stats, Dark Mode."
+    },
+    {
+      "id": "odblhgiogpigmabbjoekkhlbfiommljo",
+      "userCount": 35,
+      "userCountText": "35 users",
+      "englishDescription": "Hide YouTube search history suggestions in the search dropdown (does not delete history)."
+    },
+    {
+      "id": "bdeaocefmnkeinfiknfeahpghemjjgjo",
+      "userCount": 30,
+      "userCountText": "30 users",
+      "englishDescription": "Queue follow-up messages and reuse saved prompts on ChatGPT."
+    },
+    {
+      "id": "aanphhcamfkdoddabpndlehafpnlihgb",
+      "userCount": 11,
+      "userCountText": "11 users",
+      "englishDescription": "Track visited sites, dwell time, new-tab site opens, and the first site after browser startup."
+    },
+    {
+      "id": "gihgdlmihjffijgdcphogioneecekpdl",
+      "userCount": 13,
+      "userCountText": "13 users",
+      "englishDescription": "Hides account-menu sign-out entries on Google and YouTube pages to reduce accidental sign-outs."
+    },
+    {
+      "id": "ekgikkblidfggbmadhdbepnikknmdgmk",
+      "userCount": 6,
+      "userCountText": "6 users",
+      "englishDescription": "Reduce YouTube distractions with page-based toggles, multilingual popup controls, and watch-time tools."
+    },
+    {
+      "id": "jglhflgbojcnjjjlombjijgmkpeafmem",
+      "userCount": 5,
+      "userCountText": "5 users",
+      "englishDescription": "Professional video watch time tracking with multiple metrics and historical reports."
+    },
+    {
+      "id": "kgldileenmeldkmlefmgoebbfeckcihl",
+      "userCount": 2,
+      "userCountText": "2 users",
+      "englishDescription": "Track, measure, and monitor video watch time via a real-time overlay timer with customizable display options."
+    },
+    {
+      "id": "ehhijipfiopdlmhglhhkbhndaodfnfdj",
+      "userCount": 2,
+      "userCountText": "2 users",
+      "englishDescription": "Auto refresh pages, detect changes, and auto-click selected page positions in order on a custom interval."
+    },
+    {
+      "id": "nmnfklkcpjkglpjekmjocbagneignlfi",
+      "userCount": 1,
+      "userCountText": "1 user",
+      "englishDescription": "Pure black new tab page with a random quote and author in 10 major languages."
+    }
+  ]
+}

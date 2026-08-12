@@ -27,6 +27,22 @@ npm run dev
 
 導覽列的地球按鈕會在桌面滑鼠懸停、鍵盤操作或觸控點擊時展開語言選單。英文是預設語言，使用根目錄頁面；繁體中文使用 `/zh` 及相應的 `/zh/...` 內容頁，因此重新整理或分享連結後仍會保留所選語言。原有的 `/en` 網址會繼續載入英文，確保舊連結仍可使用。
 
+## Chrome Web Store 自動資料
+
+擴充功能頁面的公開使用者數量及英文簡介來自 Chrome Web Store。GitHub Actions 會在香港時間每天 `00:17`、`06:17`、`12:17` 和 `18:17` 自動同步，並依使用者數量由多至少排列。
+
+- `data/extensions.json` 保存不常改動的擴充功能 ID、名稱、網址、圖示及備用簡介。
+- `data/chrome-web-store.json` 是自動產生的最近一次完整成功快照，不應手動編輯。
+- `scripts/sync-chrome-web-store.mjs` 以英文商店頁面的 Overview 第一段作為官方英文簡介；任何一個項目擷取失敗時不會覆寫既有快照。
+- 自動化只會在數據改變，或距離上一次保存超過 30 天時建立 commit，避免每六小時產生沒有內容價值的版本記錄。
+
+本機手動同步需要先安裝 Playwright Chromium：
+
+```bash
+npx playwright install chromium
+npm run sync:webstore
+```
+
 ## 部署到 GitHub Pages
 
 專案已包含 `.github/workflows/deploy-pages.yml`。每次將程式推送到 `main` 分支，GitHub Actions 都會自動建立及部署靜態網站。

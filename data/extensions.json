@@ -1,0 +1,102 @@
+[
+  {
+    "id": "hbaefnliifnjeegbijmkjognpfcgcjja",
+    "name": "Better Instagram: Stop Scrolling",
+    "storeUrl": "https://chromewebstore.google.com/detail/better-instagram-stop-scr/hbaefnliifnjeegbijmkjognpfcgcjja",
+    "icon": "/extension-icons/better-instagram.png",
+    "fallbackDescription": {
+      "en": "Stop scrolling on Instagram Web: hide ads and suggestions, dim posts from accounts you do not follow, use grayscale mode, view a Reels timer and statistics, and enable Dark Mode.",
+      "zh": "停止在 Instagram 網頁版無意義滑動：隱藏廣告與推薦內容、淡化未追蹤貼文、灰階模式、Reels 計時器與統計、深色模式。"
+    }
+  },
+  {
+    "id": "odblhgiogpigmabbjoekkhlbfiommljo",
+    "name": "YouTube Search History Hider",
+    "storeUrl": "https://chromewebstore.google.com/detail/youtube-search-history-hi/odblhgiogpigmabbjoekkhlbfiommljo",
+    "icon": "/extension-icons/youtube-search-history-hider.png",
+    "fallbackDescription": {
+      "en": "Hide YouTube search-history suggestions from the search dropdown without deleting or changing the underlying history.",
+      "zh": "隱藏 YouTube 搜尋下拉選單中的搜尋記錄建議，但不會刪除或修改實際記錄。"
+    }
+  },
+  {
+    "id": "bdeaocefmnkeinfiknfeahpghemjjgjo",
+    "name": "ChatGPT Message Queue",
+    "storeUrl": "https://chromewebstore.google.com/detail/chatgpt-message-queue/bdeaocefmnkeinfiknfeahpghemjjgjo",
+    "icon": "/extension-icons/chatgpt-message-queue.png",
+    "fallbackDescription": {
+      "en": "Queue follow-up prompts while ChatGPT is still responding.",
+      "zh": "在 ChatGPT 仍在回應時預先排隊後續提示，讓對話流程不中斷。"
+    }
+  },
+  {
+    "id": "aanphhcamfkdoddabpndlehafpnlihgb",
+    "name": "Browser Statistic",
+    "storeUrl": "https://chromewebstore.google.com/detail/browser-statistic/aanphhcamfkdoddabpndlehafpnlihgb",
+    "icon": "/extension-icons/browser-statistic.png",
+    "fallbackDescription": {
+      "en": "Track visited sites, dwell time, new-tab site opens, and the first site opened after browser startup.",
+      "zh": "記錄造訪的網站、停留時間、新分頁網站開啟次數，以及瀏覽器啟動後開啟的第一個網站。"
+    }
+  },
+  {
+    "id": "gihgdlmihjffijgdcphogioneecekpdl",
+    "name": "Google Sign-out Button Blocker",
+    "storeUrl": "https://chromewebstore.google.com/detail/google-sign-out-button-bl/gihgdlmihjffijgdcphogioneecekpdl",
+    "icon": "/extension-icons/google-signout-blocker.png",
+    "fallbackDescription": {
+      "en": "Hide account-menu sign-out entries on Google and YouTube pages to reduce accidental sign-outs.",
+      "zh": "隱藏 Google 與 YouTube 帳戶選單中的登出項目，減少意外登出。"
+    }
+  },
+  {
+    "id": "ekgikkblidfggbmadhdbepnikknmdgmk",
+    "name": "Better Youtube: Reduce Distraction",
+    "storeUrl": "https://chromewebstore.google.com/detail/better-youtube-reduce-dis/ekgikkblidfggbmadhdbepnikknmdgmk",
+    "icon": "/extension-icons/better-youtube.png",
+    "fallbackDescription": {
+      "en": "Reduce YouTube distractions with page-based toggles, multilingual popup controls, and watch-time tools.",
+      "zh": "透過依頁面分類的開關、多語言 popup 控制和觀看時間工具，減少 YouTube 干擾。"
+    }
+  },
+  {
+    "id": "jglhflgbojcnjjjlombjijgmkpeafmem",
+    "name": "Video Watch Time Statistic Pro",
+    "storeUrl": "https://chromewebstore.google.com/detail/video-watch-time-statisti/jglhflgbojcnjjjlombjijgmkpeafmem",
+    "icon": "/extension-icons/video-watch-time-pro.png",
+    "fallbackDescription": {
+      "en": "Professional video watch-time tracking with multiple metrics and historical reports.",
+      "zh": "以多種指標與歷史報告，專業追蹤不同網站的影片觀看時間。"
+    }
+  },
+  {
+    "id": "kgldileenmeldkmlefmgoebbfeckcihl",
+    "name": "Video Watched Time Companion",
+    "storeUrl": "https://chromewebstore.google.com/detail/video-watched-time-compan/kgldileenmeldkmlefmgoebbfeckcihl",
+    "icon": "/extension-icons/video-watched-time-companion.png",
+    "fallbackDescription": {
+      "en": "Track, measure, and monitor video watch time through a real-time overlay timer with customizable display options.",
+      "zh": "透過可自訂顯示的即時浮動計時器，追蹤、量度及監察影片觀看時間。"
+    }
+  },
+  {
+    "id": "ehhijipfiopdlmhglhhkbhndaodfnfdj",
+    "name": "Website Auto Refresh",
+    "storeUrl": "https://chromewebstore.google.com/detail/website-auto-refresh/ehhijipfiopdlmhglhhkbhndaodfnfdj",
+    "icon": "/extension-icons/website-auto-refresh.png",
+    "fallbackDescription": {
+      "en": "Keep selected browser tabs up to date and monitor important page changes without manually reloading each page.",
+      "zh": "自動重新整理指定的瀏覽器分頁，並監察重要的頁面變化，無需逐頁手動重新載入。"
+    }
+  },
+  {
+    "id": "nmnfklkcpjkglpjekmjocbagneignlfi",
+    "name": "QuoteSpark",
+    "storeUrl": "https://chromewebstore.google.com/detail/quotespark/nmnfklkcpjkglpjekmjocbagneignlfi",
+    "icon": "/extension-icons/quotespark.png",
+    "fallbackDescription": {
+      "en": "A pure-black new-tab page displaying a random quote and author in 10 major languages.",
+      "zh": "純黑新分頁，顯示 10 種主要語言的隨機名言和作者。"
+    }
+  }
+]
