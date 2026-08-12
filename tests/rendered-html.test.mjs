@@ -35,8 +35,13 @@ test("language menu spans the complete header width", async () => {
 });
 
 test("About Me uses one heading, an equally sized star, and blank lines between paragraphs", async () => {
-  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const [source, css] = await Promise.all([
+    readFile(new URL("../app/site-page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
 
+  assert.match(source, /Hi, I'm Steven/);
+  assert.doesNotMatch(source, /Hi, I(?:’|')\s+m Steven/);
   assert.match(css, /\.about-heading \{ display: flex; align-items: center;/);
   assert.match(css, /\.about-star, \.about-hero h1 \{ font-size: clamp\(3rem, 5vw, 5rem\); \}/);
   assert.match(css, /\.about-body \{ display: block; max-width: 1040px; \}/);

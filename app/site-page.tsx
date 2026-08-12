@@ -116,7 +116,7 @@ const translations = {
     about: {
       title: "About Me",
       paragraphs: [
-        "Hi, I’m Steven, also known online as Developer Steven. I am a university student from Hong Kong, majoring in Physics and Data Analytics.",
+        "Hi, I'm Steven, also known online as Developer Steven. I am a university student from Hong Kong, majoring in Physics and Data Analytics.",
         "Outside of university and extension development, I enjoy reading, learning about investing, and maintaining a healthy and active lifestyle. I go to the gym regularly and enjoy outdoor activities such as hiking, camping, cycling, and fishing. I am also committed to lifelong learning and frequently explore new AI tools and skills, particularly vibe coding.",
         "I try to limit my use of social media platforms such as Facebook, Instagram, and Threads. Research has found that heavier use of short-form video platforms is associated with poorer attention, inhibitory control, and other cognitive outcomes. However, I do not believe the issue is as simple as saying that social media is entirely harmful. Its effects can vary depending on how a platform is used, what content a person consumes, and how well they are able to control their usage.",
         "Despite being conscious of these risks, I still sometimes find myself spending more time than intended on online content. This personal struggle inspired me to create browser extensions that help reduce distractions, discourage mindless scrolling, and give users greater control over how they spend their time online.",
