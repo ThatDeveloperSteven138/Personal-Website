@@ -12,6 +12,17 @@ function compactWhitespace(value) {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
 }
 
+export function normalizeOverviewDescription(value) {
+  return value
+    .replace(/\u00a0/g, " ")
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/[\t ]+/g, " ").trim())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 export function parseUserCountLabel(label) {
   const normalizedLabel = compactWhitespace(label);
   const match = normalizedLabel.match(/^([\d,.]+(?:\.\d+)?)\s*([KMB])?(\+)?\s+users?$/i);
@@ -73,7 +84,7 @@ async function extractStoreData(page, extension) {
       (heading) => heading.textContent?.trim().toLowerCase() === "overview",
     );
     const overviewContent = overviewHeading?.parentElement?.nextElementSibling;
-    const englishDescription = overviewContent?.querySelector("p")?.textContent?.trim() ?? null;
+    const englishDescription = overviewContent?.innerText?.trim() ?? null;
 
     return {
       pageTitle: document.querySelector("h1")?.textContent?.trim() ?? null,
@@ -83,7 +94,7 @@ async function extractStoreData(page, extension) {
   });
 
   if (!extracted.userCountText) throw new Error("The public user count was not found");
-  if (!extracted.englishDescription || extracted.englishDescription.length < 10 || extracted.englishDescription.length > 500) {
+  if (!extracted.englishDescription || extracted.englishDescription.length < 10 || extracted.englishDescription.length > 15_000) {
     throw new Error("The English overview description was missing or outside the expected length");
   }
   if (extracted.pageTitle !== extension.name) {
@@ -93,7 +104,7 @@ async function extractStoreData(page, extension) {
   return {
     id: extension.id,
     ...parseUserCountLabel(extracted.userCountText),
-    englishDescription: compactWhitespace(extracted.englishDescription),
+    englishDescription: normalizeOverviewDescription(extracted.englishDescription),
   };
 }
 

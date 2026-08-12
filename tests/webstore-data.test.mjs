@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   heartbeatDue,
+  normalizeOverviewDescription,
   parseUserCountLabel,
   snapshotDataChanged,
 } from "../scripts/sync-chrome-web-store.mjs";
@@ -19,6 +20,13 @@ test("parses the public Chrome Web Store user-count formats used for sorting", (
   assert.throws(() => parseUserCountLabel("many users"), /Unsupported Chrome Web Store user count/);
 });
 
+test("preserves the complete Overview structure while normalizing incidental spacing", () => {
+  assert.equal(
+    normalizeOverviewDescription(" Short summary.\r\n\r\n  Key features: \r\n  First feature  \r\n  Second feature "),
+    "Short summary.\n\nKey features:\nFirst feature\nSecond feature",
+  );
+});
+
 test("keeps the static extension catalog and generated snapshot complete and unique", () => {
   assert.equal(catalog.length, 10);
   assert.equal(new Set(catalog.map((item) => item.id)).size, catalog.length);
@@ -33,8 +41,10 @@ test("keeps the static extension catalog and generated snapshot complete and uni
   for (const item of snapshot.items) {
     assert.ok(Number.isSafeInteger(item.userCount) && item.userCount >= 0);
     assert.match(item.userCountText, /users?$/i);
-    assert.ok(item.englishDescription.length >= 10 && item.englishDescription.length <= 500);
+    assert.ok(item.englishDescription.length >= 10 && item.englishDescription.length <= 15_000);
   }
+  assert.ok(snapshot.items.some((item) => item.englishDescription.length > 500));
+  assert.ok(snapshot.items.some((item) => item.englishDescription.includes("\n\n")));
 });
 
 test("detects content changes without treating check timestamps as new store data", () => {

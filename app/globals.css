@@ -219,7 +219,7 @@ main { min-height: 100vh; overflow: hidden; position: relative; }
 .extension-wide-meta .extension-users { font-family: inherit; }
 .extension-wide-identity h3 { margin: 8px 0 0; font-size: clamp(1.35rem, 2.2vw, 2rem); letter-spacing: -.045em; line-height: 1.16; }
 .extension-wide-copy { border-left: 1px solid var(--soft-line); padding-left: clamp(28px, 4vw, 52px); }
-.extension-wide-copy p, .extension-inline-reveal p { margin: 0 0 20px; color: var(--muted); line-height: 1.78; }
+.extension-wide-copy p, .extension-inline-reveal p { margin: 0 0 20px; color: var(--muted); line-height: 1.78; overflow-wrap: anywhere; white-space: pre-wrap; }
 .extension-detail-link { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; background: #1e2836; color: white; padding: 11px 15px; text-decoration: none; font-size: 0.75rem; font-weight: 750; line-height: 1.25; transition: background 180ms ease, transform 180ms ease; }
 .extension-detail-link:hover, .extension-detail-link:focus-visible { background: #3a315d; outline: none; transform: translateY(-1px); }
 

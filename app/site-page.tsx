@@ -36,7 +36,7 @@ function extensionItems(language: Language, unavailable: string) {
         catalogIndex,
         userCount: storeData?.userCount ?? -1,
         userLabel: extensionUserLabel(storeData, language, unavailable),
-        // The official English short description is authoritative for both language views.
+        // The complete official English Overview is authoritative for both language views.
         // The localized catalog text remains a resilient fallback for the initial or failed sync state.
         description: storeData?.englishDescription ?? extension.fallbackDescription[language],
       };
