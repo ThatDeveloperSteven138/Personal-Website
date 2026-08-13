@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-08-12T23:04:46.826Z",
+  "checkedAt": "2026-08-13T05:51:48.238Z",
   "items": [
     {
       "id": "hbaefnliifnjeegbijmkjognpfcgcjja",
-      "userCount": 203,
-      "userCountText": "203 users",
+      "userCount": 206,
+      "userCountText": "206 users",
       "englishDescription": "Stop scrolling on Instagram Web: hide ads/suggestions, dim non-followed posts, grayscale, Reels timer and stats, Dark Mode.\n\nBetter Instagram: Stop Scrolling helps you take control of Instagram Web by removing common distractions and making the feed less “sticky.” It lets you hide low-value sections (ads, suggestions, side panels, etc.), visually de-emphasize content you don’t want to engage with, and optionally track time spent—so you can stay focused when you open Instagram for a purpose.\n\nWhat it does:\nDeclutters the interface so your attention stays on what you actually came to see.\nReduces “infinite scroll” traps by hiding or limiting recommended content.\nAdds optional focus tools like grayscale and watch-time tracking to encourage mindful browsing.\n\nKey features:\nHide distractions (toggleable):\nSuggested / recommended sections\nAds (where possible on the web UI)\nSide panels and other clutter that encourages extra scrolling\n\nFocus modes:\nOptional grayscale mode to reduce visual stimulation\nDim / gray out non-followed content (where available) to keep your feed centered on accounts you follow\nReels control (optional):\nReels watch-time timer\nBasic usage stats to help you notice patterns and cut back\n\nHow to use:\nInstall the extension.\nOpen Instagram on desktop.\nClick the extension icon to open the popup.\nTurn features on/off based on your preference—changes apply immediately.\n\nPrivacy & data:\nThe extension runs locally in your browser.\nIt does not sell data and does not transmit your browsing content to a server.\nAny counters/stats (if enabled) are stored locally for the extension to function.\n\nNotes:\nInstagram’s layout changes often, so some elements may move or be renamed over time. If something stops working, please send feedback and a screenshot.\nNot affiliated with Instagram or Meta."
     },
     {
       "id": "odblhgiogpigmabbjoekkhlbfiommljo",
-      "userCount": 36,
-      "userCountText": "36 users",
+      "userCount": 35,
+      "userCountText": "35 users",
       "englishDescription": "Hide YouTube search history suggestions in the search dropdown (does not delete history).\n\nYouTube Search History Hider hides your YouTube search history suggestions inside the search dropdown, so your past searches won’t pop up when you click the search bar.\n\nThis is especially useful when you’re screen sharing, presenting in class/meetings, streaming, or using YouTube in public—where you want a cleaner, more private search experience.\n\nKey features\n- Hides “search history / recent searches” suggestion items in the YouTube search dropdown\n- One-click toggle (enable/disable anytime from the extension popup)\n- Lightweight and fast — runs automatically on YouTube pages\n- Does NOT delete or modify your Google/YouTube history — it only hides the UI suggestions on the page\n\nHow it works\nWhen enabled, the extension detects suggestion items that appear to be search-history entries (for example, items with a “remove” button, a history-style icon, or history-related UI patterns) and hides them from the dropdown list.\n\nPermissions & privacy\n- Website access (youtube.com): Required to hide elements on the YouTube page.\n- Storage: Used only to remember whether the extension is enabled.\nThis extension does not collect, transmit, or sell any personal data. No analytics, no tracking, and no external network requests.\n\nNotes\nYouTube frequently updates its UI. If YouTube changes the suggestion layout, the extension may need an update to continue working as expected.\n\nVersion 1.0.1"
     },
     {
