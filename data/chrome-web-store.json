@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-08-15T04:50:21.558Z",
+  "checkedAt": "2026-08-16T16:45:00.242Z",
   "items": [
     {
       "id": "hbaefnliifnjeegbijmkjognpfcgcjja",
@@ -10,14 +10,14 @@
     },
     {
       "id": "odblhgiogpigmabbjoekkhlbfiommljo",
-      "userCount": 35,
-      "userCountText": "35 users",
+      "userCount": 42,
+      "userCountText": "42 users",
       "englishDescription": "Hide YouTube search history suggestions in the search dropdown (does not delete history).\n\nYouTube Search History Hider hides your YouTube search history suggestions inside the search dropdown, so your past searches won’t pop up when you click the search bar.\n\nThis is especially useful when you’re screen sharing, presenting in class/meetings, streaming, or using YouTube in public—where you want a cleaner, more private search experience.\n\nKey features\n- Hides “search history / recent searches” suggestion items in the YouTube search dropdown\n- One-click toggle (enable/disable anytime from the extension popup)\n- Lightweight and fast — runs automatically on YouTube pages\n- Does NOT delete or modify your Google/YouTube history — it only hides the UI suggestions on the page\n\nHow it works\nWhen enabled, the extension detects suggestion items that appear to be search-history entries (for example, items with a “remove” button, a history-style icon, or history-related UI patterns) and hides them from the dropdown list.\n\nPermissions & privacy\n- Website access (youtube.com): Required to hide elements on the YouTube page.\n- Storage: Used only to remember whether the extension is enabled.\nThis extension does not collect, transmit, or sell any personal data. No analytics, no tracking, and no external network requests.\n\nNotes\nYouTube frequently updates its UI. If YouTube changes the suggestion layout, the extension may need an update to continue working as expected.\n\nVersion 1.0.1"
     },
     {
       "id": "bdeaocefmnkeinfiknfeahpghemjjgjo",
-      "userCount": 33,
-      "userCountText": "33 users",
+      "userCount": 35,
+      "userCountText": "35 users",
       "englishDescription": "Queue follow-up messages and reuse saved prompts on ChatGPT.\n\nChatGPT Message Queue helps you keep the conversation moving by letting you queue your next message while ChatGPT is still replying.\n\nKey features:\n• Queue messages during active responses (via button or Enter)\n• View pending messages above the composer\n• Edit or delete any queued message before it is sent\n• Automatically send queued messages in order after ChatGPT finishes\n• Works across ChatGPT Home, Custom GPTs, and Temporary Chat pages\n\nThis extension is built to remove reply bottlenecks and improve rapid follow-up workflows for users who ask multi-step questions, iterate quickly, or run high-frequency chats."
     },
     {
@@ -28,8 +28,8 @@
     },
     {
       "id": "gihgdlmihjffijgdcphogioneecekpdl",
-      "userCount": 15,
-      "userCountText": "15 users",
+      "userCount": 16,
+      "userCountText": "16 users",
       "englishDescription": "Hides account-menu sign-out entries on Google and YouTube pages to reduce accidental sign-outs.\n\nGoogle Sign-out Button Blocker is a single-purpose extension that hides “Sign out / Logout” entries in account menus on Google and YouTube, reducing accidental sign-outs that interrupt your workflow (re-login, 2FA prompts, lost context, etc.).\n\nKey features\nAutomatically hides sign-out UI in supported Google and YouTube pages, including dynamically rendered account menus.\nOne-click toggle to enable/disable protection at any time.\n“Disable for 10 minutes” button to temporarily show sign-out entries, with automatic resume when the countdown ends.\nBest-effort real-time sync across open tabs/frames so changes apply without manual refresh.\n\nHow it works / limitations\nThis extension does not access or change your account credentials or login state. It only hides matching sign-out UI elements on the page.\nIf Google/YouTube updates their UI and detection stops working, refresh the page or reopen the tab.\n\nPermissions rationale\nGoogle/YouTube site access: required to hide sign-out UI on those sites.\nstorage: stores your enable/disable state and the temporary-disable timer locally.\ntabs / webNavigation: used to sync state updates across the active tab and frames for immediate effect.\n\nPrivacy\nNo data collection, no tracking, and no external data transmission. Settings are stored locally in your browser."
     },
     {
@@ -46,20 +46,20 @@
     },
     {
       "id": "kgldileenmeldkmlefmgoebbfeckcihl",
-      "userCount": 3,
-      "userCountText": "3 users",
+      "userCount": 4,
+      "userCountText": "4 users",
       "englishDescription": "Track, measure, and monitor video watch time via a real-time overlay timer with customizable display options.\n\nVideo Watched Time Companion helps you stay aware of how much time you spend watching videos online by providing clear, real-time watch-time statistics directly on video pages.\n\nThe extension displays an unobtrusive on-page timer overlay that tracks your viewing time and can show different statistics, including:\nTime watched in the current session\nTotal time watched on the current site\nToday’s total watch time\nWeekly, monthly, and yearly totals\n\nYou can freely choose which statistics appear in the overlay through simple toggle controls in the extension’s settings.\n\nFor deeper insights, the extension also provides a statistics chart page that opens in a new tab, allowing you to review your watch-time data by site and over time.\n\nAll data is processed locally in your browser. The extension does not collect, transmit, or share personal data with external servers.\n\nVideo Watched Time Companion is designed for users who want better awareness of their video-watching habits and a lightweight way to manage their screen time."
     },
     {
       "id": "ehhijipfiopdlmhglhhkbhndaodfnfdj",
-      "userCount": 4,
-      "userCountText": "4 users",
+      "userCount": 5,
+      "userCountText": "5 users",
       "englishDescription": "Auto refresh pages, detect changes, and auto-click selected page positions in order on a custom interval.\n\nWebsite Auto Refresh helps you keep selected browser tabs up to date and monitor important page changes without manually reloading each page.\n\nFeatures:\n- Choose one or more open tabs as refresh targets.\n- Set a custom auto-refresh interval for selected tabs.\n- Enable page change detection to compare page text after refreshes.\n- Pause automatically when a configured keyword appears on the page.\n- Pick a viewport point and click it repeatedly on a custom interval.\n- Manage active refresh pages directly from the popup.\n- Switch the popup UI between English, Traditional Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, and Urdu.\n\nNotes:\nPage change detection and auto-click work only on pages that allow extension content scripts. Browser internal pages, browser store pages, extension pages, restricted PDF viewers, and some browser-managed pages are not supported. Auto-click uses viewport coordinates, so page layout changes can affect where clicks land. Use auto-refresh and auto-click responsibly on sites where repeated requests or automated actions may be restricted."
     },
     {
       "id": "nmnfklkcpjkglpjekmjocbagneignlfi",
-      "userCount": 2,
-      "userCountText": "2 users",
+      "userCount": 4,
+      "userCountText": "4 users",
       "englishDescription": "Pure black new tab page with a random quote and author in 10 major languages.\n\nQuoteSpark turns every new tab into a clean, distraction-free black page with a randomly selected inspirational quote and author.\n\nKey features:\n- Random quote on every new tab\n- Smart weighted rotation to reduce repeats\n- 10-language support (English, Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, Urdu)\n- Language switch in popup (no language controls on the new tab page)\n- Popup refresh button to load a new quote with animation\n- “About the author” action to search the author name in your selected language\n- Minimal, fast, and lightweight UI\n\nWhy install QuoteSpark:\n- Start each tab with focus and motivation\n- Keep your browsing experience simple and elegant\n\nPrivacy:\nQuoteSpark stores only local extension settings (such as language preference and quote exposure counts) on your device. It does not collect personal data, does not track browsing activity, and does not send quote data to external servers."
     }
   ]
