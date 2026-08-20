@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-08-17T16:49:38.022Z",
+  "checkedAt": "2026-08-20T22:48:36.376Z",
   "items": [
     {
       "id": "hbaefnliifnjeegbijmkjognpfcgcjja",
-      "userCount": 208,
-      "userCountText": "208 users",
+      "userCount": 210,
+      "userCountText": "210 users",
       "englishDescription": "Stop scrolling on Instagram Web: hide ads/suggestions, dim non-followed posts, grayscale, Reels timer and stats, Dark Mode.\n\nBetter Instagram: Stop Scrolling helps you take control of Instagram Web by removing common distractions and making the feed less “sticky.” It lets you hide low-value sections (ads, suggestions, side panels, etc.), visually de-emphasize content you don’t want to engage with, and optionally track time spent—so you can stay focused when you open Instagram for a purpose.\n\nWhat it does:\nDeclutters the interface so your attention stays on what you actually came to see.\nReduces “infinite scroll” traps by hiding or limiting recommended content.\nAdds optional focus tools like grayscale and watch-time tracking to encourage mindful browsing.\n\nKey features:\nHide distractions (toggleable):\nSuggested / recommended sections\nAds (where possible on the web UI)\nSide panels and other clutter that encourages extra scrolling\n\nFocus modes:\nOptional grayscale mode to reduce visual stimulation\nDim / gray out non-followed content (where available) to keep your feed centered on accounts you follow\nReels control (optional):\nReels watch-time timer\nBasic usage stats to help you notice patterns and cut back\n\nHow to use:\nInstall the extension.\nOpen Instagram on desktop.\nClick the extension icon to open the popup.\nTurn features on/off based on your preference—changes apply immediately.\n\nPrivacy & data:\nThe extension runs locally in your browser.\nIt does not sell data and does not transmit your browsing content to a server.\nAny counters/stats (if enabled) are stored locally for the extension to function.\n\nNotes:\nInstagram’s layout changes often, so some elements may move or be renamed over time. If something stops working, please send feedback and a screenshot.\nNot affiliated with Instagram or Meta."
     },
     {
       "id": "odblhgiogpigmabbjoekkhlbfiommljo",
-      "userCount": 41,
-      "userCountText": "41 users",
+      "userCount": 43,
+      "userCountText": "43 users",
       "englishDescription": "Hide YouTube search history suggestions in the search dropdown (does not delete history).\n\nYouTube Search History Hider hides your YouTube search history suggestions inside the search dropdown, so your past searches won’t pop up when you click the search bar.\n\nThis is especially useful when you’re screen sharing, presenting in class/meetings, streaming, or using YouTube in public—where you want a cleaner, more private search experience.\n\nKey features\n- Hides “search history / recent searches” suggestion items in the YouTube search dropdown\n- One-click toggle (enable/disable anytime from the extension popup)\n- Lightweight and fast — runs automatically on YouTube pages\n- Does NOT delete or modify your Google/YouTube history — it only hides the UI suggestions on the page\n\nHow it works\nWhen enabled, the extension detects suggestion items that appear to be search-history entries (for example, items with a “remove” button, a history-style icon, or history-related UI patterns) and hides them from the dropdown list.\n\nPermissions & privacy\n- Website access (youtube.com): Required to hide elements on the YouTube page.\n- Storage: Used only to remember whether the extension is enabled.\nThis extension does not collect, transmit, or sell any personal data. No analytics, no tracking, and no external network requests.\n\nNotes\nYouTube frequently updates its UI. If YouTube changes the suggestion layout, the extension may need an update to continue working as expected.\n\nVersion 1.0.1"
     },
     {
       "id": "bdeaocefmnkeinfiknfeahpghemjjgjo",
-      "userCount": 37,
-      "userCountText": "37 users",
+      "userCount": 36,
+      "userCountText": "36 users",
       "englishDescription": "Queue follow-up messages and reuse saved prompts on ChatGPT.\n\nChatGPT Message Queue helps you keep the conversation moving by letting you queue your next message while ChatGPT is still replying.\n\nKey features:\n• Queue messages during active responses (via button or Enter)\n• View pending messages above the composer\n• Edit or delete any queued message before it is sent\n• Automatically send queued messages in order after ChatGPT finishes\n• Works across ChatGPT Home, Custom GPTs, and Temporary Chat pages\n\nThis extension is built to remove reply bottlenecks and improve rapid follow-up workflows for users who ask multi-step questions, iterate quickly, or run high-frequency chats."
     },
     {
@@ -34,8 +34,8 @@
     },
     {
       "id": "ekgikkblidfggbmadhdbepnikknmdgmk",
-      "userCount": 9,
-      "userCountText": "9 users",
+      "userCount": 10,
+      "userCountText": "10 users",
       "englishDescription": "Reduce YouTube distractions with page-based toggles, multilingual popup controls, and watch-time tools.\n\nBetter Youtube: Reduce Distraction helps you customize the YouTube interface so you can focus on what you want to watch.\n\nThis extension adds a clean popup control panel with page-based tabs (Home, Video, Shorts, Subscriptions, and You) and lets you quickly turn features on or off with one click.\n\nKey features:\nHide distracting elements such as recommendations, homepage Shorts recommendations, comments, live chat, and other attention-grabbing sections\nHide specific sidebar items and “More from YouTube” entries (including YouTube Premium, Studio, Music, Kids, and YouTube TV)\nSeparate controls for different pages (Home / Video / Shorts / Subscriptions / You) so settings are more precise\nFeature search with direct toggle support (click a result or press Enter to toggle)\nAll ON / All OFF buttons for fast setup\nToday’s YouTube Watch Time display to help users track usage and manage screen time\nMultilingual popup UI (10 languages) with translated labels and multilingual keyword matching for more reliable behavior\n\nThis extension is useful for students, professionals, and anyone who wants a cleaner YouTube experience with fewer distractions and better focus.\n\nNote: This extension customizes the YouTube interface in your browser and is not affiliated with YouTube or Google."
     },
     {
@@ -52,8 +52,8 @@
     },
     {
       "id": "ehhijipfiopdlmhglhhkbhndaodfnfdj",
-      "userCount": 5,
-      "userCountText": "5 users",
+      "userCount": 7,
+      "userCountText": "7 users",
       "englishDescription": "Auto refresh pages, detect changes, and auto-click selected page positions in order on a custom interval.\n\nWebsite Auto Refresh helps you keep selected browser tabs up to date and monitor important page changes without manually reloading each page.\n\nFeatures:\n- Choose one or more open tabs as refresh targets.\n- Set a custom auto-refresh interval for selected tabs.\n- Enable page change detection to compare page text after refreshes.\n- Pause automatically when a configured keyword appears on the page.\n- Pick a viewport point and click it repeatedly on a custom interval.\n- Manage active refresh pages directly from the popup.\n- Switch the popup UI between English, Traditional Chinese, Hindi, Spanish, French, Arabic, Bengali, Portuguese, Russian, and Urdu.\n\nNotes:\nPage change detection and auto-click work only on pages that allow extension content scripts. Browser internal pages, browser store pages, extension pages, restricted PDF viewers, and some browser-managed pages are not supported. Auto-click uses viewport coordinates, so page layout changes can affect where clicks land. Use auto-refresh and auto-click responsibly on sites where repeated requests or automated actions may be restricted."
     },
     {
